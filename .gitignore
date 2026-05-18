@@ -38,3 +38,9 @@ yarn-error.log*
 next-env.d.ts
 
 /src/generated/prisma
+
+# python (Phase 2 ingestion)
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/

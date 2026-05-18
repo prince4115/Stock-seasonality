@@ -1,0 +1,53 @@
+# Daily price refresh — runs the Python ingestion against the production
+# Supabase database. Template-ready: once the repo is on GitHub, add a
+# DIRECT_URL secret (Settings -> Secrets -> Actions) pointing at the
+# Supabase direct (port 5432) connection string and this workflow will
+# pull the last 5 trading days for every active ticker each morning.
+#
+# Cron is 09:30 UTC = 04:30 ET, 30 minutes after the NYSE close-to-open
+# settlement window. yfinance has the prior day's bar by then.
+#
+# Manual run: GitHub Actions tab -> "Daily price refresh" -> "Run workflow".
+
+name: Daily price refresh
+
+on:
+  schedule:
+    - cron: "30 9 * * 2-6" # Tue-Sat 09:30 UTC (covers Mon-Fri market closes)
+  workflow_dispatch:
+    inputs:
+      window:
+        description: "yfinance window (e.g., 5d, 1mo, 1y, 15y)"
+        required: false
+        default: "5d"
+      include_delisted:
+        description: "Also pull delisted tickers"
+        type: boolean
+        required: false
+        default: false
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run ingestion
+        env:
+          DIRECT_URL: ${{ secrets.DIRECT_URL }}
+        run: |
+          python ingest_prices.py \
+            --window "${{ github.event.inputs.window || '5d' }}" \
+            ${{ github.event.inputs.include_delisted == 'true' && '--include-delisted' || '' }}

@@ -1,7 +1,16 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
+// Stock Seasonality Analyzer — Prisma schema
+//
+// Phase 2 data layer. Conventions:
+// - Decimal(18,6) for prices: plenty of headroom for any equity ticker
+//   (12 digits before the decimal, 6 after).
+// - BigInt for volume: daily share volume on a mega-cap can exceed 2.1B.
+// - DateTime @db.Date for calendar-only columns (festival dates, price bars):
+//   no timezone gymnastics across markets.
+// - `delisted` + `delistedAt` keep delisted tickers in the universe for
+//   survivorship-bias correctness — Phase 3 analysis filters on the
+//   analysis window, not on a "currently active" boolean.
+// - `dataSource` + `sourceMeta` are provenance fields so we can ingest
+//   yfinance today and Polygon.io later without a schema rewrite.
 
 generator client {
   provider = "prisma-client"
@@ -10,4 +19,147 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+}
+
+// ---------------------------------------------------------------------------
+// Category — consumer-spending bucket (travel, retail, food, ...). One stock
+// belongs to one primary category; a festival can affect many categories.
+// ---------------------------------------------------------------------------
+model Category {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  stocks    Stock[]
+  festivals FestivalEventCategory[]
+}
+
+// ---------------------------------------------------------------------------
+// Stock — one ticker. `delisted` + `delistedAt` are the survivorship-bias
+// flags: we keep the row and its historical PriceHistory so 10-year
+// backtests don't accidentally drop the failures.
+// ---------------------------------------------------------------------------
+model Stock {
+  id         String    @id @default(cuid())
+  ticker     String    @unique
+  name       String
+  exchange   String?
+  currency   String    @default("USD")
+  delisted   Boolean   @default(false)
+  delistedAt DateTime? @db.Date
+  dataSource String    @default("yfinance")
+  sourceMeta Json?
+  categoryId String
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  category Category           @relation(fields: [categoryId], references: [id])
+  prices   PriceHistory[]
+  scores   SeasonalityScore[]
+
+  @@index([categoryId])
+  @@index([delisted])
+}
+
+// ---------------------------------------------------------------------------
+// PriceHistory — one daily OHLCV bar. `adjClose` is split- and
+// dividend-adjusted; raw `close` is the unadjusted close. Analysis uses
+// adjClose; raw OHLC is kept for sanity-checking and charting.
+// ---------------------------------------------------------------------------
+model PriceHistory {
+  id       String   @id @default(cuid())
+  stockId  String
+  date     DateTime @db.Date
+  open     Decimal  @db.Decimal(18, 6)
+  high     Decimal  @db.Decimal(18, 6)
+  low      Decimal  @db.Decimal(18, 6)
+  close    Decimal  @db.Decimal(18, 6)
+  adjClose Decimal  @db.Decimal(18, 6)
+  volume   BigInt
+  source   String   @default("yfinance")
+
+  stock Stock @relation(fields: [stockId], references: [id], onDelete: Cascade)
+
+  @@unique([stockId, date])
+  @@index([date])
+}
+
+// ---------------------------------------------------------------------------
+// FestivalEvent — one occurrence of a recurring event. `slug` repeats
+// across years (one "diwali" row per year); the unique constraint is on
+// (slug, date). `region` lets us filter India-specific vs US-specific.
+// ---------------------------------------------------------------------------
+model FestivalEvent {
+  id           String   @id @default(cuid())
+  slug         String
+  name         String
+  date         DateTime @db.Date
+  durationDays Int      @default(1)
+  region       String   @default("US")
+  description  String?
+  createdAt    DateTime @default(now())
+
+  categories FestivalEventCategory[]
+
+  @@unique([slug, date])
+  @@index([date])
+  @@index([slug])
+}
+
+// Join table: which categories does a given festival historically move?
+// `weight` (0..1) lets Phase 3 weight event-window returns — e.g., Diwali
+// has weight 1.0 for Jewelry, 0.6 for Apparel, 0.3 for Travel.
+model FestivalEventCategory {
+  festivalEventId String
+  categoryId      String
+  weight          Float  @default(1.0)
+
+  festivalEvent FestivalEvent @relation(fields: [festivalEventId], references: [id], onDelete: Cascade)
+  category      Category      @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([festivalEventId, categoryId])
+  @@index([categoryId])
+}
+
+// ---------------------------------------------------------------------------
+// SeasonalityScore — cached monthly seasonality per stock + window.
+// Phase 3 computes and populates this; Phase 4/5 reads it. The
+// `excludeCovid` flag matches the user-facing "exclude 2020-2021" toggle —
+// we store both variants so the page can flip instantly without recompute.
+// Event-window returns (T-30/T-7/T/T+7) get their own table in Phase 3 if
+// needed; this model is monthly-only.
+// ---------------------------------------------------------------------------
+model SeasonalityScore {
+  id               String   @id @default(cuid())
+  stockId          String
+  windowYears      Int
+  month            Int
+  avgReturn        Float
+  pctYearsPositive Float
+  pctYearsBeatMean Float
+  sampleSize       Int
+  excludeCovid     Boolean  @default(false)
+  computedAt       DateTime @default(now())
+
+  stock Stock @relation(fields: [stockId], references: [id], onDelete: Cascade)
+
+  @@unique([stockId, windowYears, month, excludeCovid])
+  @@index([stockId])
+}
+
+// ---------------------------------------------------------------------------
+// WaitlistSignup — Phase 4 /api/waitlist target. `ipHash` is for
+// rate-limiting (we hash before storing — never store raw IPs).
+// ---------------------------------------------------------------------------
+model WaitlistSignup {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  source    String?
+  ipHash    String?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
 }
