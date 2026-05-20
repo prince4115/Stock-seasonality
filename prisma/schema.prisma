@@ -56,9 +56,10 @@ model Stock {
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
 
-  category Category           @relation(fields: [categoryId], references: [id])
-  prices   PriceHistory[]
-  scores   SeasonalityScore[]
+  category    Category           @relation(fields: [categoryId], references: [id])
+  prices      PriceHistory[]
+  scores      SeasonalityScore[]
+  eventScores EventWindowScore[]
 
   @@index([categoryId])
   @@index([delisted])
@@ -129,8 +130,8 @@ model FestivalEventCategory {
 // Phase 3 computes and populates this; Phase 4/5 reads it. The
 // `excludeCovid` flag matches the user-facing "exclude 2020-2021" toggle —
 // we store both variants so the page can flip instantly without recompute.
-// Event-window returns (T-30/T-7/T/T+7) get their own table in Phase 3 if
-// needed; this model is monthly-only.
+// Event-window returns live in EventWindowScore (below); this model is
+// monthly-only.
 // ---------------------------------------------------------------------------
 model SeasonalityScore {
   id               String   @id @default(cuid())
@@ -148,6 +149,43 @@ model SeasonalityScore {
 
   @@unique([stockId, windowYears, month, excludeCovid])
   @@index([stockId])
+}
+
+// ---------------------------------------------------------------------------
+// EventWindowScore — cached event-window returns. One row per
+// (stock, festivalSlug, windowKind, excludeCovid).
+//
+// Window kinds map to the brief's (T-30, T-7), (T-7, T), (T, T+7):
+//   PRE30_PRE7  — run-up: 30 trading days before -> 7 trading days before
+//   PRE7_EVENT  — week into event: 7 trading days before -> event day
+//   EVENT_POST7 — week after event: event day -> 7 trading days after
+//
+// Brief lists 6 models; we add this 7th because the spec also calls for
+// caching event-window returns and stuffing them into SeasonalityScore
+// would force ugly nullable / discriminator columns.
+// ---------------------------------------------------------------------------
+enum EventWindowKind {
+  PRE30_PRE7
+  PRE7_EVENT
+  EVENT_POST7
+}
+
+model EventWindowScore {
+  id               String          @id @default(cuid())
+  stockId          String
+  festivalSlug     String
+  windowKind       EventWindowKind
+  avgReturn        Float
+  pctYearsPositive Float
+  sampleSize       Int
+  excludeCovid     Boolean         @default(false)
+  computedAt       DateTime        @default(now())
+
+  stock Stock @relation(fields: [stockId], references: [id], onDelete: Cascade)
+
+  @@unique([stockId, festivalSlug, windowKind, excludeCovid])
+  @@index([stockId])
+  @@index([festivalSlug])
 }
 
 // ---------------------------------------------------------------------------
