@@ -46,7 +46,15 @@ export const stocksData: StockSeed[] = [
   { ticker: "DG", name: "Dollar General", categorySlug: "retail", exchange: "NYSE" },
   { ticker: "KSS", name: "Kohl's", categorySlug: "retail", exchange: "NYSE" },
   { ticker: "M", name: "Macy's", categorySlug: "retail", exchange: "NYSE" },
-  { ticker: "JWN", name: "Nordstrom", categorySlug: "retail", exchange: "NYSE" },
+  {
+    ticker: "JWN",
+    name: "Nordstrom",
+    categorySlug: "retail",
+    exchange: "NYSE",
+    // Taken private by Nordstrom family + Liverpool; deal closed May 20, 2025.
+    delisted: true,
+    delistedAt: new Date("2025-05-20"),
+  },
   { ticker: "TJX", name: "TJX Companies", categorySlug: "retail", exchange: "NYSE" },
   { ticker: "ROST", name: "Ross Stores", categorySlug: "retail", exchange: "NASDAQ" },
   { ticker: "BURL", name: "Burlington Stores", categorySlug: "retail", exchange: "NYSE" },
@@ -62,6 +70,9 @@ export const stocksData: StockSeed[] = [
   },
   { ticker: "KHC", name: "Kraft Heinz", categorySlug: "food-beverage", exchange: "NASDAQ" },
   { ticker: "GIS", name: "General Mills", categorySlug: "food-beverage", exchange: "NYSE" },
+  // K = Kellanova (post-Kellogg-split entity, Oct 2023). yfinance currently
+  // returns no data for the single-letter ticker — known follow-up to revisit
+  // when we swap to Polygon.io.
   { ticker: "K", name: "Kellanova", categorySlug: "food-beverage", exchange: "NYSE" },
   { ticker: "CPB", name: "Campbell Soup", categorySlug: "food-beverage", exchange: "NYSE" },
   { ticker: "SJM", name: "J.M. Smucker", categorySlug: "food-beverage", exchange: "NYSE" },
@@ -91,7 +102,17 @@ export const stocksData: StockSeed[] = [
   { ticker: "NKE", name: "Nike", categorySlug: "apparel", exchange: "NYSE" },
   { ticker: "LULU", name: "Lululemon Athletica", categorySlug: "apparel", exchange: "NASDAQ" },
   { ticker: "UAA", name: "Under Armour", categorySlug: "apparel", exchange: "NYSE" },
-  { ticker: "GPS", name: "Gap", categorySlug: "apparel", exchange: "NYSE" },
+  {
+    // Gap Inc. changed ticker from GPS to GAP in early 2024 alongside their
+    // rebrand. yfinance no longer returns data under "GPS".
+    ticker: "GPS",
+    name: "Gap Inc. (old ticker)",
+    categorySlug: "apparel",
+    exchange: "NYSE",
+    delisted: true,
+    delistedAt: new Date("2024-02-28"),
+  },
+  { ticker: "GAP", name: "The Gap, Inc.", categorySlug: "apparel", exchange: "NYSE" },
   { ticker: "ANF", name: "Abercrombie & Fitch", categorySlug: "apparel", exchange: "NYSE" },
   { ticker: "AEO", name: "American Eagle Outfitters", categorySlug: "apparel", exchange: "NYSE" },
   { ticker: "URBN", name: "Urban Outfitters", categorySlug: "apparel", exchange: "NASDAQ" },
@@ -145,8 +166,17 @@ export const stocksData: StockSeed[] = [
     exchange: "NASDAQ",
   },
   {
+    // PARA dissolved into Paramount Skydance (PSKY) at merger close 2025-08-07.
     ticker: "PARA",
-    name: "Paramount Global",
+    name: "Paramount Global (pre-merger)",
+    categorySlug: "cinema-entertainment",
+    exchange: "NASDAQ",
+    delisted: true,
+    delistedAt: new Date("2025-08-07"),
+  },
+  {
+    ticker: "PSKY",
+    name: "Paramount Skydance Corporation",
     categorySlug: "cinema-entertainment",
     exchange: "NASDAQ",
   },
@@ -163,13 +193,32 @@ export const stocksData: StockSeed[] = [
     exchange: "NYSE",
   },
   {
+    // SIX merged with Cedar Fair 2024-07-01; combined entity took ticker FUN.
     ticker: "SIX",
-    name: "Six Flags Entertainment",
+    name: "Six Flags Entertainment (pre-merger)",
+    categorySlug: "cinema-entertainment",
+    exchange: "NYSE",
+    delisted: true,
+    delistedAt: new Date("2024-07-01"),
+  },
+  {
+    ticker: "FUN",
+    name: "Six Flags Entertainment Corporation (post-merger)",
     categorySlug: "cinema-entertainment",
     exchange: "NYSE",
   },
   {
+    // SEAS = SeaWorld Entertainment, renamed to United Parks & Resorts on
+    // 2024-02-08 with ticker change to PRKS.
     ticker: "SEAS",
+    name: "SeaWorld Entertainment (old ticker)",
+    categorySlug: "cinema-entertainment",
+    exchange: "NYSE",
+    delisted: true,
+    delistedAt: new Date("2024-02-08"),
+  },
+  {
+    ticker: "PRKS",
     name: "United Parks & Resorts",
     categorySlug: "cinema-entertainment",
     exchange: "NYSE",
