@@ -1,164 +1,145 @@
-# Phase 3 — Analysis engine (summary)
+# Phase 4 — API routes (summary)
 
 ## What landed
 
-**Pure-function analysis library** under `src/lib/analysis/`. No Prisma, no
-I/O — all DB concerns live at the boundary in `run.ts`. Three modules,
-three test files, **50 unit tests**.
+**Five route handlers** under `src/app/api/`, all reading from the Phase 3
+cached score tables — zero compute on the request path.
 
-| Module            | Exports                                                                                                                                          | Tests |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ----- |
-| `types.ts`        | `PriceBar`, `SeasonalityOptions`, `MonthScore`, `EventWindowKind`, `EVENT_WINDOW_KINDS`, `EventScore`                                            | —     |
-| `returns.ts`      | `pctReturn`, `monthKey`, `groupByMonth`, `monthlyReturn`, `sortBars`, `inDateRange`, `yearsBefore`, `isCovidYear`, `mean`, `fractionGreaterThan` | 26    |
-| `seasonality.ts`  | `filterToWindow`, `monthlyReturnsByMonthKey`, `computeSeasonality`                                                                               | 15    |
-| `event-window.ts` | `indexAtOrAfter`, `eventWindowReturn`, `aggregateEventWindow`                                                                                    | 13    |
+| Route                  | Method | Purpose                                                                                 |
+| ---------------------- | ------ | --------------------------------------------------------------------------------------- |
+| `/api/categories`      | GET    | All 9 categories with `stockCount` (active stocks only)                                 |
+| `/api/category/[slug]` | GET    | One category + its stocks + monthly aggregate heatmap + top 3 stocks per month          |
+| `/api/stock/[ticker]`  | GET    | One stock + its 12 monthly scores + all event-window scores                             |
+| `/api/events/upcoming` | GET    | Upcoming festivals (date >= today) with affected categories and `daysUntil`             |
+| `/api/waitlist`        | POST   | Email signup with validation, IP-hash rate limit (3/hour), 201/400/409/429 status codes |
 
-Vitest set up with `npm test` and `npm run test:watch`. No vite.config — vitest
-picks up `*.test.ts` files via convention.
+**Data layer** under `src/lib/data/` — thin Prisma wrappers the routes
+import:
 
-**DB orchestrator** — `src/lib/analysis/run.ts`. For each stock:
+- `categories.ts` — `getAllCategories`, `getCategoryBySlug`
+- `stocks.ts` — `getStockByTicker`, `getStocksByCategorySlug`
+- `scores.ts` — `getMonthlyScores`, `getEventScores`, `getCategoryMonthlyAggregate` (raw SQL aggregate), `getTopSeasonalStocksForMonth`, plus `parseWindow` / `parseExcludeCovid` query-param helpers
+- `festivals.ts` — `getUpcomingFestivals`, `parseRegion`
+- `waitlist.ts` — `addToWaitlist`, `emailExistsInWaitlist`, `countRecentSignupsByIp`
 
-1. Fetch all `PriceHistory` bars (sorted).
-2. For each `(windowYears, excludeCovid)`: build 12 `SeasonalityScore` rows.
-3. For each `(festivalSlug, EventWindowKind, excludeCovid)`: build one `EventWindowScore` row.
-4. Atomic `prisma.$transaction([deleteMany, createMany, deleteMany, createMany])`. ~4 SQL round-trips per stock instead of ~150 individual upserts. Idempotent.
+**Rate limiting** — `src/lib/rate-limit.ts`. Composable pieces:
 
-**CLI** — `scripts/compute-analysis.ts` with flags:
+- `isValidEmail(unknown): boolean` — type guard, trims, length-capped at 254
+- `extractClientIp(headers)` — `x-forwarded-for` first hop, fallback to `x-real-ip`
+- `hashIp(ip)` — HMAC-SHA256 with `RATE_LIMIT_SALT` env var (raw IPs never stored)
+- `decideAllow(count, max)` — pure policy
+- `checkRateLimit(ipHash)` — composite DB + policy
 
-```bash
-npm run analyze                        # all active stocks, windows 5/10/15
-npm run analyze -- --ticker NKE        # one ticker
-npm run analyze -- --window 5          # one window
-npm run analyze -- --include-delisted  # include TIF
-npm run analyze -- --as-of 2024-12-31  # historical analysis as of a date
-```
-
-**Schema addition** — `EventWindowScore` model + Postgres enum `EventWindowKind`
-(`PRE30_PRE7` / `PRE7_EVENT` / `EVENT_POST7`). Migration
-`20260520220214_add_event_window_score` applied. Brief listed 6 models; this is
-the 7th, justified by the brief's own "cache all results in DB; never
-recompute on a page request" requirement — event-window scores need somewhere
-to live and stuffing them into `SeasonalityScore` would force ugly nullable
-columns.
+**Vitest config** — added `vitest.config.ts` with the `@/` path alias and
+`dotenv/config` so test files that transitively import the Prisma client
+can resolve the DATABASE_URL.
 
 ## Verification
 
-- **`npm test`**: 50 tests across 3 files, all green (~700 ms cold).
+- **`npm test`**: **66 tests across 4 files**, all green (50 from Phase 3 + 16
+  new for rate-limit).
 - **`npm run lint`**: clean.
-- **`npm run build`**: clean. Type-checks the new analysis lib + run.ts + CLI.
+- **`npm run build`**: clean. New routes show up as dynamic (ƒ) in the route
+  list.
 - **`npm run format:check`**: clean.
-- **`npm run analyze -- --ticker NKE`**: 72 seasonality + 102 event-window rows in 1.3s — matches the math (12 months × 3 windows × 2 toggles = 72; 17 festival slugs × 3 kinds × 2 toggles = 102).
-- **`npm run analyze` (full)**: 84 stocks processed in 29.5s, **6,048 SeasonalityScore + 8,568 EventWindowScore** rows written to Supabase. 6 skipped (no price data — see follow-ups).
 
-Sanity-checked NKE January seasonality across 5y/10y/15y from the DB directly:
+**Live smoke tests** via curl against the dev server:
 
 ```
-NKE | window | month | avgReturn  | %positive | n
-    |  5y    |     1 | -0.0110   | 0.40      | 5
-    | 10y    |     1 | +0.0039   | 0.50      | 10
-    | 15y    |     1 | +0.0043   | 0.53      | 15
-    |  5y    |     7 | +0.0399   | 0.80      | 5
-    | 10y    |     7 | +0.0195   | 0.70      | 10
-    | 15y    |     7 | +0.0186   | 0.67      | 15
+GET /api/categories                  → 9 categories, stockCount per category
+GET /api/category/travel?window=5    → 12 stocks, 12 monthlyAggregate rows,
+                                       top stocks per month (e.g. Jan: RCL
+                                       +13.3% avg, 80% positive, n=5)
+GET /api/category/nonexistent        → 404 { error: "category not found" }
+GET /api/stock/NKE?window=10         → 12 monthly + 51 event-window rows;
+                                       Jan: +0.39%, 50% positive, n=10
+GET /api/events/upcoming?limit=3     → Father's Day → Independence Day →
+                                       back-to-school, with affected categories
+GET /api/events/upcoming?region=IN   → Diwali occurrences
+POST /api/waitlist (valid email)     → 201 { ok: true }
+POST /api/waitlist (same email)      → 409 { error: "already signed up" }
+POST /api/waitlist (bad email)       → 400 { error: "invalid email" }
+POST /api/waitlist (bad JSON body)   → 400 { error: "invalid json" }
 ```
 
-Numbers move in plausible directions across window lengths — sample size and
-direction match expected behavior for a consumer-discretionary name.
+The smoke-test signup row was cleaned up from `WaitlistSignup` after
+verification.
 
 ## Decisions worth flagging
 
-1. **`pctYearsBeatMean` compares against the _overall_ window mean**, not a
-   per-month or per-season reference. Per-month would be self-referential
-   (each month beats its own mean ~50% of the time by definition). This
-   matches the brief's "% of years a month was positive AND beat the stock's
-   overall mean". The "AND" combination is left to the consumer; we store
-   the two atoms separately so the API/UI can multiply, AND-combine, or
-   display both alongside sample size.
-2. **Event-window offsets are trading days**, not calendar days. yfinance
-   only returns trading days, so indexing into the sorted bars array
-   naturally skips weekends/holidays. When an event falls on a non-trading
-   day (e.g., Christmas on a Sunday), we anchor at the first bar on/after
-   the event date — the typical event-study convention.
-3. **Vitest, not Jest or `node:test`**. Vitest is zero-config, runs `.test.ts`
-   directly, and has good DX. Jest needs heavier config; `node:test`
-   requires tsx-loader and worse error formatting.
-4. **TypeScript target bumped to es2022.** Was implicit es5; that doesn't
-   permit `for…of` over a `Map`. es2022 is widely supported and matches the
-   runtime we actually deploy to (Vercel Edge / Node 22).
-5. **No combined "seasonality strength score" column.** Could add one later
-   (`pctYearsPositive * pctYearsBeatMean` or `AND` count), but keeping the
-   atoms separate gives the UI flexibility to show "12% avg, 60% positive,
-   n=10" instead of one opaque number — which the brief explicitly calls
-   for ("Always show sample size and confidence next to any percentage").
+1. **`force-dynamic` on every route.** Each GET reads from DB and the
+   query params drive content — there's no benefit to attempting static
+   generation. We can add HTTP cache headers (`Cache-Control: s-maxage`)
+   in Phase 6 polish for CDN edge caching, but for Phase 4 we keep it
+   simple.
+2. **Email + IP rate-limit only, no captcha or honeypot.** Three signups
+   per IP per hour is enough for an honest user (rare to need more) and
+   slow enough to deter a basic abuser. If we see spam we'll add a
+   honeypot field in the frontend Phase 5 sign-up form before reaching
+   for hCaptcha.
+3. **IP hashing with HMAC-SHA256 + salt.** Raw IPs never touch
+   `WaitlistSignup`. `RATE_LIMIT_SALT` env var; a constant fallback for
+   dev. The deploy story is to set this on Vercel before launch.
+4. **Top-stocks ranking by `avgReturn`** for the category's per-month
+   top-N. We could rank by `pctYearsPositive` or a composite — for now
+   `avgReturn` matches what the brief describes ("top seasonal stocks").
+5. **Category aggregate uses raw SQL** (`$queryRaw`) for `AVG()` across
+   stocks. Prisma's groupBy supports this but the SQL is clearer and the
+   joins are explicit. The category filter respects `delisted=false`
+   here — Phase 3 survivorship review item ("filter analysis output by
+   whether the stock had data within the requested window") is
+   satisfied at the score-row level: only rows with `sampleSize > 0`
+   were ever inserted.
+6. **Race on /api/waitlist between "email exists" check and INSERT** is
+   handled by catching the Prisma unique-constraint error and converting
+   to 409. The check is still useful for the happy-path response time.
 
-## Risks / follow-ups for Phase 4+
+## Risks / follow-ups for Phase 5+
 
-- **6 active tickers had zero ingested bars** and got skipped. All are
-  real-world ticker churn:
+- **No streaming/SSE.** All routes return JSON. Phase 5 frontend should
+  be fine with this.
+- **No HTTP caching headers.** When this hits Vercel, edge caching will
+  matter — Phase 6.
+- **No CSRF protection on /api/waitlist** because there's no
+  session. The endpoint is idempotent enough (duplicate emails 409) and
+  the rate limit caps abuse.
+- **`parseWindow` defaults to 15y.** If a stock doesn't have 15y of
+  history (e.g. ABNB IPO'd 2020), `monthly` will return fewer than 12
+  rows for the 15y window. Phase 5 should look at the response's row
+  count vs. expected 12 to decide whether to fall back to a shorter
+  window UI-side.
+- **`/api/category/[slug]` issues ~14 queries** (1 for category, 1 for
+  stocks, 1 raw aggregate, 12 top-N per month). Promise.all parallelizes
+  the per-month queries. Could collapse to a single windowed SQL query
+  later if this is slow under load.
 
-  | Ticker | Reason                                                                    |
-  | ------ | ------------------------------------------------------------------------- |
-  | PARA   | Paramount Global → Skydance merger Aug 2025, ticker transition            |
-  | SEAS   | United Parks & Resorts — yfinance gap; should be queryable, needs digging |
-  | SIX    | Six Flags + Cedar Fair merger Jul 2024 → new ticker `FUN`                 |
-  | GPS    | Gap Inc. — ticker change. yfinance returns no 15y history under "GPS"     |
-  | JWN    | Nordstrom — went private Dec 2024 via Nordstrom family + Liverpool        |
-  | K      | Kellogg split Oct 2023; ticker `K` is now Kellanova. yfinance gap         |
-
-  Three of these (JWN, GPS, K) weren't on Phase 2's known-issues list — they
-  surfaced when the analysis loop discovered they had zero `PriceHistory`
-  rows. Action: backfill via Polygon.io when we swap data sources, or mark
-  them `delisted` with an appropriate `delistedAt` in the seed.
-
-- **No backtest preview yet.** The brief says "/stock/[ticker] —
-  seasonality fingerprint, event-window table, and backtest preview". This
-  phase covers the first two. Backtest preview (e.g., "if you bought NKE
-  every July 1 from 2014, here's your IRR") is a Phase 5 frontend feature.
-- **Survivorship handling is correct but partial.** `delisted=true` rows
-  stay in the universe. Phase 4 query layer needs to filter analysis output
-  by whether the stock had data within the requested window — e.g., TIF's
-  hypothetical scores wouldn't be meaningful for a 5y window ending 2026
-  since it delisted in 2021. Easy filter at the API layer; flagged here for
-  Phase 4 to wire up.
-- **No FX awareness.** ADRs (LVMUY, CFRUY, BURBY, PRDSY) compute returns in
-  their listed currency (USD for ADRs but reflecting EUR/GBP underlying). A
-  Diwali run-up in LVMUY mixes the stock's move with the EUR/USD move,
-  which can be material over multi-week windows. Not blocking Phase 4 but
-  worth a paragraph on the About page.
-
-## How to re-run
+## How to use
 
 ```bash
-# from stock-seasonality/
+# Dev
+npm run dev
 
-# unit tests
-npm test
-npm run test:watch    # while developing
+# Then in another shell:
+curl -s http://localhost:3000/api/categories | jq
+curl -s "http://localhost:3000/api/category/jewelry-luxury?window=10" | jq
+curl -s "http://localhost:3000/api/stock/NKE?window=15&excludeCovid=1" | jq
+curl -s "http://localhost:3000/api/events/upcoming?region=IN&limit=5" | jq
 
-# full analysis (idempotent)
-npm run analyze
-
-# one ticker
-npm run analyze -- --ticker NKE
-
-# subset of windows
-npm run analyze -- --window 5
+# Waitlist signup
+curl -X POST -H "Content-Type: application/json" \
+  -d '{"email":"you@example.com","source":"landing"}' \
+  http://localhost:3000/api/waitlist
 ```
 
 ## What I'd want to know on review
 
-- Is the **trading-day vs calendar-day** choice right for event windows?
-  The brief writes "(T-30, T-7)" — could go either way; I picked trading
-  days because (a) it's the event-study convention, and (b) the data
-  granularity (one bar per trading day) makes it the natural index. Easy to
-  add a calendar-day variant if you'd rather.
-- For the **6 skipped tickers**, should I (a) keep them as-is and document
-  the gap, (b) replace with current tickers (FUN for SIX, etc.) and lose
-  the pre-merger history, or (c) mark them `delisted` so they don't pollute
-  Phase 5's active universe?
-- The **7th model (EventWindowScore)** — green light, or would you rather
-  see it merged into `SeasonalityScore` somehow? I think the separation
-  pays off in Phase 4 query simplicity, but it's a deliberate departure from
-  your "6 models" list.
+- Are the **response shapes** what Phase 5 wants? In particular,
+  `/api/category/[slug]` returns four sections (`category`, `stocks`,
+  `monthlyAggregate`, `topStocksByMonth`) — happy to split into separate
+  endpoints if you'd rather have the page issue parallel fetches.
+- **3 signups per IP per hour** is a reasonable default — if you want
+  tighter (1/hour) or looser, easy knob.
+- **Top-N ranking** — `avgReturn` vs `pctYearsPositive`? The brief
+  doesn't specify.
 
-Say **"go Phase 4"** when ready — API routes are next.
+Say **"go Phase 5"** when ready — frontend wiring is next.
