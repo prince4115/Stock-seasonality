@@ -1,145 +1,101 @@
-# Phase 4 — API routes (summary)
+# Phase 5 — Frontend pages (summary)
 
 ## What landed
 
-**Five route handlers** under `src/app/api/`, all reading from the Phase 3
-cached score tables — zero compute on the request path.
+Every page now renders real data from the Phase 3 score caches. Pages are
+**server-rendered**, calling the `src/lib/data/*` layer directly (no internal
+`fetch('/api/...')` hops). The `/api/*` routes from Phase 4 stay around as
+the external contract.
 
-| Route                  | Method | Purpose                                                                                 |
-| ---------------------- | ------ | --------------------------------------------------------------------------------------- |
-| `/api/categories`      | GET    | All 9 categories with `stockCount` (active stocks only)                                 |
-| `/api/category/[slug]` | GET    | One category + its stocks + monthly aggregate heatmap + top 3 stocks per month          |
-| `/api/stock/[ticker]`  | GET    | One stock + its 12 monthly scores + all event-window scores                             |
-| `/api/events/upcoming` | GET    | Upcoming festivals (date >= today) with affected categories and `daysUntil`             |
-| `/api/waitlist`        | POST   | Email signup with validation, IP-hash rate limit (3/hour), 201/400/409/429 status codes |
+| Page               | What it shows                                                                                                                                                       |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/`                | Three entry-point cards + the next 3 upcoming events + 1-line methodology blurb with link to /about                                                                 |
+| `/categories`      | 9 category cards with 12-month sparklines (10y default window), best month, n=stocks covered                                                                        |
+| `/category/[slug]` | Aggregate monthly heatmap, top-3 stocks per month (12-card grid), full stocks table, upcoming events affecting it                                                   |
+| `/stock/[ticker]`  | Seasonality fingerprint heatmap (12 months × 1 row), event-window heatmap (festivals × 3 windows), summary stats, backtest preview placeholder, category breadcrumb |
+| `/calendar`        | Upcoming festivals grouped by month, each with affected-category chips and weight ×                                                                                 |
+| `/about`           | Fleshed-out methodology, survivorship handling, known limitations (ADR FX, K ticker gap), tech stack, disclaimer                                                    |
 
-**Data layer** under `src/lib/data/` — thin Prisma wrappers the routes
-import:
+Plus interactive controls (`/stock` and `/category` pages):
 
-- `categories.ts` — `getAllCategories`, `getCategoryBySlug`
-- `stocks.ts` — `getStockByTicker`, `getStocksByCategorySlug`
-- `scores.ts` — `getMonthlyScores`, `getEventScores`, `getCategoryMonthlyAggregate` (raw SQL aggregate), `getTopSeasonalStocksForMonth`, plus `parseWindow` / `parseExcludeCovid` query-param helpers
-- `festivals.ts` — `getUpcomingFestivals`, `parseRegion`
-- `waitlist.ts` — `addToWaitlist`, `emailExistsInWaitlist`, `countRecentSignupsByIp`
+- `AnalysisControls` — window selector (5y / 10y / 15y) + COVID toggle. URL-search-param-driven so configurations are shareable / bookmarkable.
 
-**Rate limiting** — `src/lib/rate-limit.ts`. Composable pieces:
+And shared visual components:
 
-- `isValidEmail(unknown): boolean` — type guard, trims, length-capped at 254
-- `extractClientIp(headers)` — `x-forwarded-for` first hop, fallback to `x-real-ip`
-- `hashIp(ip)` — HMAC-SHA256 with `RATE_LIMIT_SALT` env var (raw IPs never stored)
-- `decideAllow(count, max)` — pure policy
-- `checkRateLimit(ipHash)` — composite DB + policy
+- `Heatmap` — colorblind-friendly diverging blue↔orange CSS-grid heatmap. Tooltips show `value · n=...`. No client JS.
+- `Sparkline` — 12-point SVG sparkline with a dashed zero-line. Net-positive series stroked orange, net-negative sky. No client JS.
+- `StatNumber` — formatted % with explicit `n=` and optional secondary line. Colors follow the diverging palette.
+- `src/lib/colors.ts` — pure functions for `divergingColor(value, scaleMax)` and `textOnBackground(...)` so the palette is centralized.
 
-**Vitest config** — added `vitest.config.ts` with the `@/` path alias and
-`dotenv/config` so test files that transitively import the Prisma client
-can resolve the DATABASE_URL.
+## Non-obvious requirements — all addressed
+
+- **Sample size next to every percentage.** `StatNumber` shows `n=` inline; heatmap cells show `n=` in the tooltip; top-stock tables show `n=` per row; category sparklines show `n=stocks covered`.
+- **Toggle to exclude 2020-2021.** `AnalysisControls` flips `excludeCovid` via URL. Both flavors of scores were cached in Phase 3, so toggling is an instant page render — no recompute.
+- **Colorblind-friendly diverging blue ↔ orange.** `src/lib/colors.ts` is the single source of truth; the brand mark in `TopNav` uses the same sky→orange gradient.
 
 ## Verification
 
-- **`npm test`**: **66 tests across 4 files**, all green (50 from Phase 3 + 16
-  new for rate-limit).
-- **`npm run lint`**: clean.
-- **`npm run build`**: clean. New routes show up as dynamic (ƒ) in the route
-  list.
+- **`npm test`**: **66 tests** across 4 files, still all green.
+- **`npm run lint`**: clean (fixed two `react/no-unescaped-entities` errors from typographic quotes inside JSX).
+- **`npm run build`**: clean. Five pages flipped from static to dynamic (`ƒ`) because they now fetch from DB.
 - **`npm run format:check`**: clean.
 
-**Live smoke tests** via curl against the dev server:
+Live walkthrough (visited via production build at `npm run start`):
 
 ```
-GET /api/categories                  → 9 categories, stockCount per category
-GET /api/category/travel?window=5    → 12 stocks, 12 monthlyAggregate rows,
-                                       top stocks per month (e.g. Jan: RCL
-                                       +13.3% avg, 80% positive, n=5)
-GET /api/category/nonexistent        → 404 { error: "category not found" }
-GET /api/stock/NKE?window=10         → 12 monthly + 51 event-window rows;
-                                       Jan: +0.39%, 50% positive, n=10
-GET /api/events/upcoming?limit=3     → Father's Day → Independence Day →
-                                       back-to-school, with affected categories
-GET /api/events/upcoming?region=IN   → Diwali occurrences
-POST /api/waitlist (valid email)     → 201 { ok: true }
-POST /api/waitlist (same email)      → 409 { error: "already signed up" }
-POST /api/waitlist (bad email)       → 400 { error: "invalid email" }
-POST /api/waitlist (bad JSON body)   → 400 { error: "invalid json" }
+/                    → 9 categories detected, 89 active tickers, 3 upcoming events listed
+/categories          → 9 category cards, sparklines render with 10y data
+/category/jewelry-luxury  → aggregate heatmap, Dec is brightest (Christmas gifting), 7 stocks in table
+/stock/NKE                → Jan +0.43% (n=15), Jul +1.86% (n=15); 17 festivals × 3 windows in event grid
+/calendar                 → Father's Day, Independence Day, back-to-school in month-grouped layout
 ```
-
-The smoke-test signup row was cleaned up from `WaitlistSignup` after
-verification.
 
 ## Decisions worth flagging
 
-1. **`force-dynamic` on every route.** Each GET reads from DB and the
-   query params drive content — there's no benefit to attempting static
-   generation. We can add HTTP cache headers (`Cache-Control: s-maxage`)
-   in Phase 6 polish for CDN edge caching, but for Phase 4 we keep it
-   simple.
-2. **Email + IP rate-limit only, no captcha or honeypot.** Three signups
-   per IP per hour is enough for an honest user (rare to need more) and
-   slow enough to deter a basic abuser. If we see spam we'll add a
-   honeypot field in the frontend Phase 5 sign-up form before reaching
-   for hCaptcha.
-3. **IP hashing with HMAC-SHA256 + salt.** Raw IPs never touch
-   `WaitlistSignup`. `RATE_LIMIT_SALT` env var; a constant fallback for
-   dev. The deploy story is to set this on Vercel before launch.
-4. **Top-stocks ranking by `avgReturn`** for the category's per-month
-   top-N. We could rank by `pctYearsPositive` or a composite — for now
-   `avgReturn` matches what the brief describes ("top seasonal stocks").
-5. **Category aggregate uses raw SQL** (`$queryRaw`) for `AVG()` across
-   stocks. Prisma's groupBy supports this but the SQL is clearer and the
-   joins are explicit. The category filter respects `delisted=false`
-   here — Phase 3 survivorship review item ("filter analysis output by
-   whether the stock had data within the requested window") is
-   satisfied at the score-row level: only rows with `sampleSize > 0`
-   were ever inserted.
-6. **Race on /api/waitlist between "email exists" check and INSERT** is
-   handled by catching the Prisma unique-constraint error and converting
-   to 409. The check is still useful for the happy-path response time.
+1. **Pages import the data layer directly**, not `fetch('/api/...')`. Server components in Next.js 14 can short-circuit HTTP; doing so saves serialization round-trips and keeps everything strongly typed. The `/api/*` routes still exist for external consumers + smoke testing.
+2. **Heatmaps are server-rendered CSS grids**, not Recharts. Recharts doesn't have a native heatmap component and the grid approach is faster (no client JS), accessible (real `<div role="cell">`s), and produces clean static HTML.
+3. **Sparklines are plain SVG**, not Recharts either. 12-point polylines are trivial; Recharts adds client-side JS and dependencies for no gain at this size. Recharts is installed and ready for the line-overlay charts the brief mentions (e.g., backtest preview).
+4. **"Month × window" heatmap, not "month × year".** The brief says "month × year heatmap" for `/category/[slug]`. We have month × window aggregates cached and reused it for now (one row, 12 months at the chosen window). Adding a month-by-year matrix would need a new cache table + analysis pass — flagged for Phase 6 if you want it.
+5. **No backtest preview yet.** Stub on `/stock/[ticker]`. Real implementation needs an entry/exit rule, position-sizing assumption, and an IRR calc against historical PriceHistory — meaningful new work that didn't fit in Phase 5.
+6. **`/categories` defaults to 10y window**. Median between 5y (recent, smaller sample) and 15y (longest history, includes pre-COVID baseline). Detail pages let users change it.
+7. **Stock detail page sorts event-window rows by absolute post-event return**, so the headline rows are the ones with the most movement — visually scannable rather than alphabetical.
+8. **Delisted stocks still link to from category pages**, with a visible "delisted YYYY-MM" tag, so survivorship is transparent to the viewer.
 
-## Risks / follow-ups for Phase 5+
+## Risks / follow-ups for Phase 6
 
-- **No streaming/SSE.** All routes return JSON. Phase 5 frontend should
-  be fine with this.
-- **No HTTP caching headers.** When this hits Vercel, edge caching will
-  matter — Phase 6.
-- **No CSRF protection on /api/waitlist** because there's no
-  session. The endpoint is idempotent enough (duplicate emails 409) and
-  the rate limit caps abuse.
-- **`parseWindow` defaults to 15y.** If a stock doesn't have 15y of
-  history (e.g. ABNB IPO'd 2020), `monthly` will return fewer than 12
-  rows for the 15y window. Phase 5 should look at the response's row
-  count vs. expected 12 to decide whether to fall back to a shorter
-  window UI-side.
-- **`/api/category/[slug]` issues ~14 queries** (1 for category, 1 for
-  stocks, 1 raw aggregate, 12 top-N per month). Promise.all parallelizes
-  the per-month queries. Could collapse to a single windowed SQL query
-  later if this is slow under load.
+- **Mobile-responsive heatmaps** — the brief flagged this as "the hardest part — test early". Current heatmaps overflow-scroll horizontally on narrow viewports, which works but isn't elegant. Real fix is a vertical-month layout on small screens.
+- **Loading skeletons** — pages currently block on DB queries (~50–200 ms). Streaming `<Suspense>` boundaries would let the static shell paint immediately.
+- **Error boundaries** — `notFound()` triggers Next's 404, but DB errors currently throw. Phase 6 should add an `error.tsx` boundary.
+- **Waitlist signup form** — `/api/waitlist` exists but no UI calls it yet. A landing-page email field + honeypot field is Phase 6's smallest win.
+- **SEO + OpenGraph** — pages have title/description metadata but no `metadataBase`, no OG images, no canonical URLs. Easy Phase 6 add.
+- **Analytics** (Plausible or PostHog) — brief mentioned, not yet wired.
+- **HTTP caching headers** on API routes — for CDN edge caching.
 
 ## How to use
 
 ```bash
+cd stock-seasonality
+
 # Dev
 npm run dev
 
-# Then in another shell:
-curl -s http://localhost:3000/api/categories | jq
-curl -s "http://localhost:3000/api/category/jewelry-luxury?window=10" | jq
-curl -s "http://localhost:3000/api/stock/NKE?window=15&excludeCovid=1" | jq
-curl -s "http://localhost:3000/api/events/upcoming?region=IN&limit=5" | jq
+# Or production
+npm run build && npm run start
 
-# Waitlist signup
-curl -X POST -H "Content-Type: application/json" \
-  -d '{"email":"you@example.com","source":"landing"}' \
-  http://localhost:3000/api/waitlist
+# Then open
+http://localhost:3000
+http://localhost:3000/categories
+http://localhost:3000/category/travel
+http://localhost:3000/stock/NKE?window=5
+http://localhost:3000/stock/NKE?window=15&excludeCovid=1
+http://localhost:3000/calendar
 ```
 
 ## What I'd want to know on review
 
-- Are the **response shapes** what Phase 5 wants? In particular,
-  `/api/category/[slug]` returns four sections (`category`, `stocks`,
-  `monthlyAggregate`, `topStocksByMonth`) — happy to split into separate
-  endpoints if you'd rather have the page issue parallel fetches.
-- **3 signups per IP per hour** is a reasonable default — if you want
-  tighter (1/hour) or looser, easy knob.
-- **Top-N ranking** — `avgReturn` vs `pctYearsPositive`? The brief
-  doesn't specify.
+- **Month × window vs month × year heatmap** — call the shot before I cache month×year aggregates in Phase 6.
+- **Backtest preview** — what's the minimum viable shape? Single-month entry/exit? Multi-month? Annualized?
+- **Top-N stocks per month** is currently ranked by `avgReturn`. Same question as Phase 4 — would `pctYearsPositive` or a composite be more useful?
+- **Default window on `/categories` is 10y**. Make this user-controllable (a single dropdown that affects all 9 sparklines)?
 
-Say **"go Phase 5"** when ready — frontend wiring is next.
+Say **"go Phase 6"** for polish (mobile heatmaps, loading skeletons, SEO, analytics, waitlist UI).
