@@ -19,7 +19,7 @@ These are one-time setup items you'll need before submitting.
       - "What should my paper contain?" — confirms our paper.md hits
         the right beats.
 
-## Step 1: Push the repo to GitHub
+## Step 1: Push the repo to GitHub ✅ DONE (2026-06-01)
 
 ```bash
 cd stock-seasonality
@@ -33,7 +33,7 @@ cd stock-seasonality
 #   Do NOT add README / .gitignore / LICENSE — we have them.
 
 # Then locally, add the remote and push:
-git remote add origin https://github.com/<your-username>/stock-seasonality.git
+git remote add origin https://github.com/prince4115/Stock-seasonality.git
 git push -u origin main
 ```
 
@@ -87,7 +87,7 @@ Then on GitHub:
 
 Go to https://joss.theoj.org/papers/new and fill in:
 
-- [ ] **Repository URL:** `https://github.com/<your-username>/stock-seasonality`
+- [ ] **Repository URL:** `https://github.com/prince4115/Stock-seasonality`
 - [ ] **Software version:** `v0.1.0` (matches your release tag)
 - [ ] **Branch with paper file:** `main`
 - [ ] **Paper file path within the repository:** `docs/joss/paper.md`
