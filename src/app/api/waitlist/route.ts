@@ -33,6 +33,14 @@ export async function POST(req: NextRequest) {
   }
   const trimmedEmail = email.trim();
 
+  // Honeypot — the form ships a hidden `website` field that real users
+  // never fill in. Bots that auto-fill every input do. We return 201 to
+  // hide that we caught them; no DB write happens.
+  const honeypot = (body as { website?: unknown })?.website;
+  if (typeof honeypot === "string" && honeypot.trim() !== "") {
+    return NextResponse.json({ ok: true }, { status: 201 });
+  }
+
   const rawSource = (body as { source?: unknown })?.source;
   const source =
     typeof rawSource === "string" && rawSource.length > 0 && rawSource.length <= 64

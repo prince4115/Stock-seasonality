@@ -6,10 +6,11 @@
  */
 import { NextResponse } from "next/server";
 import { getAllCategories } from "@/lib/data/categories";
+import { SCORES_CACHE } from "@/lib/http-cache";
 
 export const dynamic = "force-dynamic";
 
 export async function GET() {
   const categories = await getAllCategories();
-  return NextResponse.json({ categories });
+  return NextResponse.json({ categories }, { headers: { "Cache-Control": SCORES_CACHE } });
 }

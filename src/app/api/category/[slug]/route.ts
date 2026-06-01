@@ -18,6 +18,7 @@ import {
   parseExcludeCovid,
   parseWindow,
 } from "@/lib/data/scores";
+import { SCORES_CACHE } from "@/lib/http-cache";
 
 export const dynamic = "force-dynamic";
 
@@ -45,12 +46,15 @@ export async function GET(req: NextRequest, { params }: { params: { slug: string
     ),
   );
 
-  return NextResponse.json({
-    category,
-    stocks,
-    monthlyAggregate,
-    topStocksByMonth: topByMonth.map((stocks, i) => ({ month: i + 1, stocks })),
-    window,
-    excludeCovid,
-  });
+  return NextResponse.json(
+    {
+      category,
+      stocks,
+      monthlyAggregate,
+      topStocksByMonth: topByMonth.map((stocks, i) => ({ month: i + 1, stocks })),
+      window,
+      excludeCovid,
+    },
+    { headers: { "Cache-Control": SCORES_CACHE } },
+  );
 }

@@ -16,6 +16,7 @@ import {
   parseExcludeCovid,
   parseWindow,
 } from "@/lib/data/scores";
+import { SCORES_CACHE } from "@/lib/http-cache";
 
 export const dynamic = "force-dynamic";
 
@@ -37,18 +38,21 @@ export async function GET(req: NextRequest, { params }: { params: { ticker: stri
     getEventScores(stock.id, excludeCovid),
   ]);
 
-  return NextResponse.json({
-    stock: {
-      ticker: stock.ticker,
-      name: stock.name,
-      exchange: stock.exchange,
-      delisted: stock.delisted,
-      delistedAt: stock.delistedAt,
-      category: stock.category,
+  return NextResponse.json(
+    {
+      stock: {
+        ticker: stock.ticker,
+        name: stock.name,
+        exchange: stock.exchange,
+        delisted: stock.delisted,
+        delistedAt: stock.delistedAt,
+        category: stock.category,
+      },
+      monthly,
+      eventWindows,
+      window,
+      excludeCovid,
     },
-    monthly,
-    eventWindows,
-    window,
-    excludeCovid,
-  });
+    { headers: { "Cache-Control": SCORES_CACHE } },
+  );
 }

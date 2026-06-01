@@ -9,6 +9,7 @@
  */
 import { type NextRequest, NextResponse } from "next/server";
 import { getUpcomingFestivals, parseRegion } from "@/lib/data/festivals";
+import { EVENTS_CACHE } from "@/lib/http-cache";
 
 export const dynamic = "force-dynamic";
 
@@ -19,5 +20,8 @@ export async function GET(req: NextRequest) {
   const region = parseRegion(url.searchParams.get("region"));
 
   const events = await getUpcomingFestivals({ limit, region });
-  return NextResponse.json({ events, region, limit });
+  return NextResponse.json(
+    { events, region, limit },
+    { headers: { "Cache-Control": EVENTS_CACHE } },
+  );
 }

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PageHeader } from "@/components/PageHeader";
+import { WaitlistForm } from "@/components/WaitlistForm";
 import { getAllCategories } from "@/lib/data/categories";
 import { getUpcomingFestivals } from "@/lib/data/festivals";
 
@@ -95,6 +96,17 @@ export default async function Home() {
             ))}
           </ul>
         )}
+      </section>
+
+      <section className="mt-10 rounded-lg border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900">
+        <h2 className="text-base font-semibold text-zinc-900 dark:text-zinc-50">Get notified</h2>
+        <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+          New categories, new tickers, new event-window analyses — drop your email and we&apos;ll
+          let you know.
+        </p>
+        <div className="mt-4">
+          <WaitlistForm source="landing" />
+        </div>
       </section>
 
       <div className="mt-10 rounded-lg border border-dashed border-zinc-300 bg-zinc-50 p-5 text-sm text-zinc-600 dark:border-zinc-700 dark:bg-zinc-900/40 dark:text-zinc-400">
