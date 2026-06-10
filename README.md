@@ -110,7 +110,7 @@ Three short bullets; the long-form treatment lives in
   T+7. Per-festival weights on the category link table let Phase 3 scale
   category-level event effects.
 - **Survivorship.** Delisted tickers stay in the schema with `delisted =
-  true` and `delistedAt = <date>` so historical analyses are not silently
+true` and `delistedAt = <date>` so historical analyses are not silently
   flattered by dropping failures (Brown, Goetzmann, Ibbotson, & Ross,
   1992). Cached score rows are only emitted when `sampleSize > 0`.
 

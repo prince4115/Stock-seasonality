@@ -60,4 +60,12 @@ export const categoriesData: CategorySeed[] = [
     name: "Beauty & personal care",
     description: "Cosmetics, skincare, fragrance. Mother's Day, Valentine's, holiday gift sets.",
   },
+  {
+    // Hidden from the public category grid (see getAllCategories) — exists
+    // so benchmark tickers like SPY have a home without polluting the
+    // consumer-spending universe.
+    slug: "benchmark",
+    name: "Benchmarks",
+    description: "Market benchmarks used by the backtest engine. Not a consumer-spending category.",
+  },
 ];

@@ -14,7 +14,8 @@
     "db:seed": "tsx prisma/seed.ts",
     "test": "vitest run",
     "test:watch": "vitest",
-    "analyze": "tsx scripts/compute-analysis.ts"
+    "analyze": "tsx scripts/compute-analysis.ts",
+    "backtest": "tsx scripts/run-backtest.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

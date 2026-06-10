@@ -14,10 +14,8 @@ These are one-time setup items you'll need before submitting.
       `docs/joss/paper.md` with your actual ORCID iD.
 - [ ] **Read the JOSS submission requirements** at
       https://joss.readthedocs.io/en/latest/submitting.html. The two
-      pages that matter most:
-      - "Submission requirements" — checks your repo against their bar.
-      - "What should my paper contain?" — confirms our paper.md hits
-        the right beats.
+      pages that matter most: - "Submission requirements" — checks your repo against their bar. - "What should my paper contain?" — confirms our paper.md hits
+      the right beats.
 
 ## Step 1: Push the repo to GitHub ✅ DONE (2026-06-01)
 
@@ -116,15 +114,15 @@ on the public GitHub issue.
 
 ## Things you might be asked, and how to answer them
 
-| Likely reviewer question | Where to point them |
-|---|---|
-| "What's the contribution?" | README + paper §2 (statement of need) |
-| "How do I run it?" | README "Quick start" |
-| "Where are the tests?" | `npm test` runs 66; src/lib/analysis/*.test.ts and src/lib/rate-limit.test.ts |
-| "How are returns computed?" | `docs/paper.md` §4 (long form) or `paper.md` Methodology |
-| "Why no ML?" | `docs/paper.md` §4.4 |
-| "What about survivorship bias?" | `docs/paper.md` §2.3 + 4.3; schema fields `Stock.delisted` and `Stock.delistedAt` |
-| "Why these specific tickers?" | README "What's inside" + `prisma/seeds/stocks.ts` (the universe construction logic) |
+| Likely reviewer question        | Where to point them                                                                 |
+| ------------------------------- | ----------------------------------------------------------------------------------- |
+| "What's the contribution?"      | README + paper §2 (statement of need)                                               |
+| "How do I run it?"              | README "Quick start"                                                                |
+| "Where are the tests?"          | `npm test` runs 66; src/lib/analysis/\*.test.ts and src/lib/rate-limit.test.ts      |
+| "How are returns computed?"     | `docs/paper.md` §4 (long form) or `paper.md` Methodology                            |
+| "Why no ML?"                    | `docs/paper.md` §4.4                                                                |
+| "What about survivorship bias?" | `docs/paper.md` §2.3 + 4.3; schema fields `Stock.delisted` and `Stock.delistedAt`   |
+| "Why these specific tickers?"   | README "What's inside" + `prisma/seeds/stocks.ts` (the universe construction logic) |
 
 ## After acceptance
 
@@ -138,12 +136,12 @@ issue cadence.
 
 ## Total effort estimate
 
-| Step | Effort |
-|---|---|
-| 1. Create GitHub repo + push | 15 min |
-| 2. Verify JOSS bar (already met) | 15 min |
-| 3. Tag release | 5 min |
-| 4. Submit at joss.theoj.org | 15 min |
-| 5. Reviewer round 1 (when it arrives) | 1–2 hours |
-| 5. Reviewer round 2 (if needed) | 1 hour |
-| **Submission alone: ~1 hour. Through acceptance: 4–8 weeks calendar.** | |
+| Step                                                                   | Effort    |
+| ---------------------------------------------------------------------- | --------- |
+| 1. Create GitHub repo + push                                           | 15 min    |
+| 2. Verify JOSS bar (already met)                                       | 15 min    |
+| 3. Tag release                                                         | 5 min     |
+| 4. Submit at joss.theoj.org                                            | 15 min    |
+| 5. Reviewer round 1 (when it arrives)                                  | 1–2 hours |
+| 5. Reviewer round 2 (if needed)                                        | 1 hour    |
+| **Submission alone: ~1 hour. Through acceptance: 4–8 weeks calendar.** |           |

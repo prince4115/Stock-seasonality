@@ -14,9 +14,14 @@ export type CategoryDetail = CategorySummary & {
   id: string;
 };
 
-/** All categories with a count of active (non-delisted) stocks. */
+/**
+ * All consumer categories with a count of active (non-delisted) stocks.
+ * The "benchmark" category (SPY etc.) is infrastructure for the backtest
+ * engine and is excluded from every public listing.
+ */
 export async function getAllCategories(): Promise<CategorySummary[]> {
   const categories = await prisma.category.findMany({
+    where: { slug: { not: "benchmark" } },
     orderBy: { name: "asc" },
     include: {
       _count: {

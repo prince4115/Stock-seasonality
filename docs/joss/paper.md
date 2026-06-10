@@ -1,5 +1,5 @@
 ---
-title: 'Stock Seasonality Analyzer: A Reproducible, Survivorship-Aware Framework for Calendar and Event-Window Analysis of Consumer-Spending Equities'
+title: "Stock Seasonality Analyzer: A Reproducible, Survivorship-Aware Framework for Calendar and Event-Window Analysis of Consumer-Spending Equities"
 tags:
   - finance
   - quantitative finance

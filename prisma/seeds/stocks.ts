@@ -255,4 +255,12 @@ export const stocksData: StockSeed[] = [
     categorySlug: "beauty-personal-care",
     exchange: "NYSE",
   },
+
+  // -------- Benchmarks (hidden category; backtest engine only) --------
+  {
+    ticker: "SPY",
+    name: "SPDR S&P 500 ETF Trust",
+    categorySlug: "benchmark",
+    exchange: "NYSE Arca",
+  },
 ];

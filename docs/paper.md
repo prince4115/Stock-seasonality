@@ -47,7 +47,7 @@ The present work does not produce new findings within this literature. It implem
 
 ### 2.2 Event-window methodology
 
-Brown and Warner (1985) and MacKinlay (1997) formalized the event-study methodology that became standard in empirical finance: define an event date *T*, define windows relative to *T* (e.g., [*T*−30, *T*−1], [*T*, *T*+1], [*T*+1, *T*+10]), and compute average returns or abnormal returns over those windows across multiple event occurrences. Although event studies originated in corporate-action research (earnings announcements, mergers, splits), the same framework applies cleanly to recurring calendar events such as Diwali, Christmas, or Black Friday.
+Brown and Warner (1985) and MacKinlay (1997) formalized the event-study methodology that became standard in empirical finance: define an event date _T_, define windows relative to _T_ (e.g., [*T*−30, *T*−1], [*T*, *T*+1], [*T*+1, *T*+10]), and compute average returns or abnormal returns over those windows across multiple event occurrences. Although event studies originated in corporate-action research (earnings announcements, mergers, splits), the same framework applies cleanly to recurring calendar events such as Diwali, Christmas, or Black Friday.
 
 Our implementation uses **trading-day** offsets (rather than calendar-day offsets) within event windows, consistent with the practice in Brown and Warner (1985), as this avoids the weekend/holiday artifact in calendar-day windows.
 
@@ -69,18 +69,18 @@ System papers describing the architecture of financial analysis tools are less c
 
 We selected 95 tickers across 9 consumer-spending categories, of which 89 are currently active and 6 are flagged delisted. Categories and their populations:
 
-| Category | Active | Delisted | Total |
-|---|---:|---:|---:|
-| Travel | 12 | 0 | 12 |
-| Retail | 14 | 1 (JWN) | 15 |
-| Food & beverage | 12 | 0 | 12 |
-| Restaurants | 10 | 0 | 10 |
-| Apparel | 12 | 1 (GPS) | 13 |
-| Jewelry & luxury | 6 | 1 (TIF) | 7 |
-| Cinema & entertainment | 11 | 3 (PARA, SIX, SEAS) | 14 |
-| Toys & hobby | 5 | 0 | 5 |
-| Beauty & personal care | 8 | 0 | 8 |
-| **Total** | **89** | **6** | **95** |
+| Category               | Active |            Delisted |  Total |
+| ---------------------- | -----: | ------------------: | -----: |
+| Travel                 |     12 |                   0 |     12 |
+| Retail                 |     14 |             1 (JWN) |     15 |
+| Food & beverage        |     12 |                   0 |     12 |
+| Restaurants            |     10 |                   0 |     10 |
+| Apparel                |     12 |             1 (GPS) |     13 |
+| Jewelry & luxury       |      6 |             1 (TIF) |      7 |
+| Cinema & entertainment |     11 | 3 (PARA, SIX, SEAS) |     14 |
+| Toys & hobby           |      5 |                   0 |      5 |
+| Beauty & personal care |      8 |                   0 |      8 |
+| **Total**              | **89** |               **6** | **95** |
 
 The universe was constructed by category-relevant U.S. equity selection rather than market-cap screen; the goal was thematic coverage of consumer spending categories likely to exhibit calendar-driven demand patterns, not a representative slice of the broader market.
 
@@ -106,14 +106,14 @@ Each festival is associated with a subset of categories via a many-to-many relat
 
 **Ticker churn.** Over the project's ingestion period (2026) we observed five tickers that ceased to return historical data under their original symbol due to corporate actions:
 
-| Old ticker | Disposition | Replacement | Date |
-|---|---|---|---|
-| TIF | Acquired (LVMH) | — (no replacement; data unavailable post-acquisition) | 2021-01-07 |
-| GPS | Renamed (Gap Inc.) | GAP | 2024-02-28 |
-| SEAS | Renamed (SeaWorld → United Parks) | PRKS | 2024-02-08 |
-| SIX | Merged (Six Flags + Cedar Fair) | FUN | 2024-07-01 |
-| JWN | Taken private (Nordstrom family + Liverpool) | — | 2025-05-20 |
-| PARA | Merged (Paramount + Skydance) | PSKY | 2025-08-07 |
+| Old ticker | Disposition                                  | Replacement                                           | Date       |
+| ---------- | -------------------------------------------- | ----------------------------------------------------- | ---------- |
+| TIF        | Acquired (LVMH)                              | — (no replacement; data unavailable post-acquisition) | 2021-01-07 |
+| GPS        | Renamed (Gap Inc.)                           | GAP                                                   | 2024-02-28 |
+| SEAS       | Renamed (SeaWorld → United Parks)            | PRKS                                                  | 2024-02-08 |
+| SIX        | Merged (Six Flags + Cedar Fair)              | FUN                                                   | 2024-07-01 |
+| JWN        | Taken private (Nordstrom family + Liverpool) | —                                                     | 2025-05-20 |
+| PARA       | Merged (Paramount + Skydance)                | PSKY                                                  | 2025-08-07 |
 
 In each case the legacy ticker was retained in the universe with `delisted = true` and `delistedAt` set to the dispositive date. Where the surviving entity retained historical data under a new ticker (PRKS, FUN, GAP, PSKY), the new ticker was added to the active universe. This treatment preserves the survivorship audit trail while ensuring the active universe reflects current market reality.
 
@@ -134,26 +134,26 @@ After ingestion, the database contains:
 
 ### 4.1 Monthly seasonality
 
-Let `bars(s)` denote the time-ordered sequence of `PriceBar` records for stock *s*, where each `PriceBar` has fields `date` and `adjClose`. Given a trailing window of *W* years (∈ {5, 10, 15}) measured backward from a reference date *t*₀ (the "as-of" date, defaulting to ingestion time), and an optional COVID-exclusion flag *c*, define:
+Let `bars(s)` denote the time-ordered sequence of `PriceBar` records for stock _s_, where each `PriceBar` has fields `date` and `adjClose`. Given a trailing window of _W_ years (∈ {5, 10, 15}) measured backward from a reference date *t*₀ (the "as-of" date, defaulting to ingestion time), and an optional COVID-exclusion flag _c_, define:
 
 $$ \text{barsIn}(s, W, c, t_0) = \{ b \in \text{bars}(s) : t_0 - W \text{ years} \le b.\text{date} \le t_0, \text{ and } b.\text{date} \notin [2020, 2021] \text{ if } c = \text{true} \}$$
 
 Partition `barsIn(s, W, c, t₀)` by calendar month (YYYY-MM), and define the monthly return for each non-singleton partition as
 
-$$ r(s, y, m) = \frac{\text{last}(\text{bars}_{y,m}).\text{adjClose} - \text{first}(\text{bars}_{y,m}).\text{adjClose}}{\text{first}(\text{bars}_{y,m}).\text{adjClose}}$$
+$$ r(s, y, m) = \frac{\text{last}(\text{bars}_{y,m}).\text{adjClose} - \text{first}(\text{bars}_{y,m}).\text{adjClose}}{\text{first}(\text{bars}\_{y,m}).\text{adjClose}}$$
 
-The seasonality score for (stock *s*, month *m*, window *W*, COVID-flag *c*) is then the tuple:
+The seasonality score for (stock _s_, month _m_, window _W_, COVID-flag _c_) is then the tuple:
 
-- **avgReturn** = mean of `r(s, y, m)` over all years *y* in the window with valid data.
-- **pctYearsPositive** = fraction of years *y* with `r(s, y, m) > 0`.
-- **pctYearsBeatMean** = fraction of years *y* with `r(s, y, m) > μ(s, W, c)`, where μ is the mean of all monthly returns for *s* in the window.
-- **sampleSize** = count of years *y* contributing a valid return.
+- **avgReturn** = mean of `r(s, y, m)` over all years _y_ in the window with valid data.
+- **pctYearsPositive** = fraction of years _y_ with `r(s, y, m) > 0`.
+- **pctYearsBeatMean** = fraction of years _y_ with `r(s, y, m) > μ(s, W, c)`, where μ is the mean of all monthly returns for _s_ in the window.
+- **sampleSize** = count of years _y_ contributing a valid return.
 
 The metric `pctYearsBeatMean` deserves comment. The seasonality literature sometimes asks "what fraction of years did this month outperform the average month for this stock?" Comparing each January return to the average of all Januaries would yield ~50% trivially, so the more meaningful comparison — the one that matches the literature's intent — is against the stock's overall mean monthly return within the window. Months with a structurally positive seasonal effect should beat that baseline more than half the time.
 
 ### 4.2 Event-window returns
 
-For an event with occurrences at dates *E* = {*e*₁, *e*₂, …, *e*ₙ}, and a stock *s* with sorted bars `bars(s)`, define the trading-day anchor index for event *eᵢ* as the smallest index *k* such that `bars(s)[k].date ≥ eᵢ`. (When the event falls on a non-trading day such as Christmas falling on a Sunday, the anchor is the first subsequent trading day, consistent with the convention in Brown and Warner, 1985.)
+For an event with occurrences at dates _E_ = {*e*₁, *e*₂, …, *e*ₙ}, and a stock _s_ with sorted bars `bars(s)`, define the trading-day anchor index for event _eᵢ_ as the smallest index _k_ such that `bars(s)[k].date ≥ eᵢ`. (When the event falls on a non-trading day such as Christmas falling on a Sunday, the anchor is the first subsequent trading day, consistent with the convention in Brown and Warner, 1985.)
 
 For each window kind ∈ {PRE30_PRE7, PRE7_EVENT, EVENT_POST7} we define index offsets:
 
@@ -163,13 +163,13 @@ For each window kind ∈ {PRE30_PRE7, PRE7_EVENT, EVENT_POST7} we define index o
 
 The event-window return is computed as the percent return between the bars at the start and end offsets. Returns are aggregated across all occurrences within the window:
 
-- **avgReturn** = mean of event-window returns across *E*.
+- **avgReturn** = mean of event-window returns across _E_.
 - **pctYearsPositive** = fraction of occurrences with positive return.
 - **sampleSize** = count of occurrences with sufficient data on both anchors (windows extending past the available data are dropped).
 
 ### 4.3 Survivorship handling
 
-We do not implement abnormal-return adjustment (subtraction of a market benchmark or factor-model expected return) at the present stage. All reported returns are raw total returns. Delisted stocks contribute to historical analyses only for the period in which they had data; specifically, a delisted stock with `delistedAt = D` will contribute zero observations to windows beginning after *D* (the `sampleSize` for those scores will reflect the absence). The cached score tables only include rows where `sampleSize > 0`, so a delisted stock does not appear in analyses that would have required data beyond its delisting date.
+We do not implement abnormal-return adjustment (subtraction of a market benchmark or factor-model expected return) at the present stage. All reported returns are raw total returns. Delisted stocks contribute to historical analyses only for the period in which they had data; specifically, a delisted stock with `delistedAt = D` will contribute zero observations to windows beginning after _D_ (the `sampleSize` for those scores will reflect the absence). The cached score tables only include rows where `sampleSize > 0`, so a delisted stock does not appear in analyses that would have required data beyond its delisting date.
 
 ### 4.4 Choice of descriptive statistics over machine learning
 
@@ -179,7 +179,7 @@ The system deliberately uses descriptive statistics — arithmetic means, fracti
 2. **The audience and use case favor interpretability.** The system is designed for educational and research use, where users benefit from understanding exactly what each number represents. A reported "+1.86%, 67% positive years, n = 15" is directly auditable; a model prediction of "+1.2% ± 0.4% with 70% confidence" hides where the number came from.
 3. **The system explicitly disclaims predictive intent.** The disclaimer present on every page reads "Not investment advice. Past patterns do not guarantee future results." Building a predictive ML model would implicitly contradict this statement.
 
-What we do *not* do — but could, in principle — is reported in Section 8.
+What we do _not_ do — but could, in principle — is reported in Section 8.
 
 ---
 
@@ -223,17 +223,17 @@ The combination of `delisted` and `delistedAt` on `Stock` plus `sampleSize` on t
 
 ### 6.1 Technology stack
 
-| Layer | Technology | Justification |
-|---|---|---|
-| Web framework | Next.js 14 (App Router) | Server components allow direct database access without HTTP round-trips; static + dynamic rendering co-exist; mature ecosystem. |
-| Language (web) | TypeScript 5 | Type safety across the schema/data/API/UI boundary. |
-| Language (ingestion) | Python 3.14 | The yfinance and pandas ecosystem is Python-only. |
-| Database | PostgreSQL on Supabase | Relational fit for the schema; reliable hosted Postgres; managed pooling. |
-| ORM | Prisma 7 (driver-adapter generator) | Schema-as-code, type-generation, migrations; the new driver-adapter generator gives us the pg client transport without giving up type safety. |
-| Charts (sparklines) | Hand-rolled SVG polylines | 12-point sparklines do not justify a charting library. |
-| Charts (heatmaps) | Custom CSS Grid with computed RGB cells | No public heatmap component in mainstream React chart libraries matches the diverging-palette and accessibility requirements (`role="cell"` per cell, native title tooltips, no client JS). |
-| Tests | Vitest | Modern Jest-replacement with first-class TypeScript and ESM support; ~700 ms cold run for 66 tests. |
-| Scheduling | GitHub Actions cron | Lightweight, no separate worker infrastructure; the daily refresh is a 90-second job. |
+| Layer                | Technology                              | Justification                                                                                                                                                                               |
+| -------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Web framework        | Next.js 14 (App Router)                 | Server components allow direct database access without HTTP round-trips; static + dynamic rendering co-exist; mature ecosystem.                                                             |
+| Language (web)       | TypeScript 5                            | Type safety across the schema/data/API/UI boundary.                                                                                                                                         |
+| Language (ingestion) | Python 3.14                             | The yfinance and pandas ecosystem is Python-only.                                                                                                                                           |
+| Database             | PostgreSQL on Supabase                  | Relational fit for the schema; reliable hosted Postgres; managed pooling.                                                                                                                   |
+| ORM                  | Prisma 7 (driver-adapter generator)     | Schema-as-code, type-generation, migrations; the new driver-adapter generator gives us the pg client transport without giving up type safety.                                               |
+| Charts (sparklines)  | Hand-rolled SVG polylines               | 12-point sparklines do not justify a charting library.                                                                                                                                      |
+| Charts (heatmaps)    | Custom CSS Grid with computed RGB cells | No public heatmap component in mainstream React chart libraries matches the diverging-palette and accessibility requirements (`role="cell"` per cell, native title tooltips, no client JS). |
+| Tests                | Vitest                                  | Modern Jest-replacement with first-class TypeScript and ESM support; ~700 ms cold run for 66 tests.                                                                                         |
+| Scheduling           | GitHub Actions cron                     | Lightweight, no separate worker infrastructure; the daily refresh is a 90-second job.                                                                                                       |
 
 ### 6.2 Test coverage
 
@@ -251,16 +251,16 @@ The rate-limiting helper carries an additional 16 tests covering email validatio
 
 End-to-end timings observed on the production database (Supabase eu-west-1) from a residential connection:
 
-| Operation | Time | Notes |
-|---|---|---|
-| Daily price refresh (5-day window, 89 tickers) | 6–8 seconds | Sequential ingestion |
-| Full 15-year backfill (89 tickers, ~3700 bars each) | ~85 seconds | Sequential; yfinance is the bottleneck |
-| Full analysis run (89 active tickers, all windows, both COVID flags) | ~30 seconds | Per-stock transaction; ~4 SQL round-trips per stock |
-| Cold page render of `/stock/NKE` | 200–350 ms | Dominated by DB query latency |
-| Cold page render of `/category/jewelry-luxury` | 250–400 ms | 14 DB queries in parallel via `Promise.all` |
-| API GET `/api/stock/NKE` (server-side) | 100–200 ms | Excludes network round-trip |
-| Unit test suite (cold) | 1.3–2.0 seconds | 66 tests across 4 files |
-| Production build (`npm run build`) | 30–45 seconds | Clean build of 14 routes |
+| Operation                                                            | Time            | Notes                                               |
+| -------------------------------------------------------------------- | --------------- | --------------------------------------------------- |
+| Daily price refresh (5-day window, 89 tickers)                       | 6–8 seconds     | Sequential ingestion                                |
+| Full 15-year backfill (89 tickers, ~3700 bars each)                  | ~85 seconds     | Sequential; yfinance is the bottleneck              |
+| Full analysis run (89 active tickers, all windows, both COVID flags) | ~30 seconds     | Per-stock transaction; ~4 SQL round-trips per stock |
+| Cold page render of `/stock/NKE`                                     | 200–350 ms      | Dominated by DB query latency                       |
+| Cold page render of `/category/jewelry-luxury`                       | 250–400 ms      | 14 DB queries in parallel via `Promise.all`         |
+| API GET `/api/stock/NKE` (server-side)                               | 100–200 ms      | Excludes network round-trip                         |
+| Unit test suite (cold)                                               | 1.3–2.0 seconds | 66 tests across 4 files                             |
+| Production build (`npm run build`)                                   | 30–45 seconds   | Clean build of 14 routes                            |
 
 ### 6.4 Example output: Nike (NKE)
 
@@ -268,13 +268,13 @@ To illustrate the output the system produces, Table 2 shows selected monthly sea
 
 **Table 2.** Selected NKE monthly seasonality, 15-year window, COVID included.
 
-| Month | avgReturn | pctYearsPositive | pctYearsBeatMean | n |
-|---|---:|---:|---:|---:|
-| January | +0.43% | 53% | 47% | 15 |
-| March | +1.21% | 60% | 53% | 15 |
-| July | +1.86% | 67% | 67% | 15 |
-| October | −0.47% | 47% | 40% | 15 |
-| December | +1.04% | 60% | 53% | 15 |
+| Month    | avgReturn | pctYearsPositive | pctYearsBeatMean |   n |
+| -------- | --------: | ---------------: | ---------------: | --: |
+| January  |    +0.43% |              53% |              47% |  15 |
+| March    |    +1.21% |              60% |              53% |  15 |
+| July     |    +1.86% |              67% |              67% |  15 |
+| October  |    −0.47% |              47% |              40% |  15 |
+| December |    +1.04% |              60% |              53% |  15 |
 
 The headline observation is that July is the most seasonally favorable month for NKE in the sample (+1.86% average return, positive in 10 of 15 years, beating the stock's overall mean monthly return in 10 of 15 years), while October is the weakest. These directions are consistent with the well-known summer-strength / autumn-weakness pattern in consumer-discretionary equities (Heston & Sadka, 2008) and with NKE's heavy back-to-school exposure.
 
@@ -334,7 +334,7 @@ The system as presented is a complete, working framework. Several extensions are
 6. **Polygon.io as an alternative data source.** Replace yfinance for tickers it cannot serve, while preserving the `dataSource` column for auditability.
 7. **Demo / paper-trading mode.** A non-real-money "trial position" feature that lets users open hypothetical positions on a stock from a chosen entry date and track unrealized P&L through subsequent events (see `notes/future-ideas.md` in the repository for the design sketch).
 
-We deliberately do *not* plan to add machine-learning forecasting layers. As argued in Section 4.4, the sample sizes do not support it and the use case does not benefit from it; doing so would risk obscuring rather than illuminating the underlying patterns.
+We deliberately do _not_ plan to add machine-learning forecasting layers. As argued in Section 4.4, the sample sizes do not support it and the use case does not benefit from it; doing so would risk obscuring rather than illuminating the underlying patterns.
 
 ---
 
@@ -354,35 +354,35 @@ This project was developed end-to-end over six phased iterations during May 2026
 
 ## References
 
-Andrade, S. C., Chhaochharia, V., & Fuerst, M. E. (2013). "Sell in May and go away" just won't go away. *Financial Analysts Journal*, 69(4), 94–105.
+Andrade, S. C., Chhaochharia, V., & Fuerst, M. E. (2013). "Sell in May and go away" just won't go away. _Financial Analysts Journal_, 69(4), 94–105.
 
-Ariel, R. A. (1987). A monthly effect in stock returns. *Journal of Financial Economics*, 18(1), 161–174.
+Ariel, R. A. (1987). A monthly effect in stock returns. _Journal of Financial Economics_, 18(1), 161–174.
 
-Bollerslev, T., Patton, A. J., & Quaedvlieg, R. (2009). Realized volatility forecasting: An empirical investigation. *Journal of Econometrics*.
+Bollerslev, T., Patton, A. J., & Quaedvlieg, R. (2009). Realized volatility forecasting: An empirical investigation. _Journal of Econometrics_.
 
-Bouman, S., & Jacobsen, B. (2002). The Halloween indicator, "Sell in May and go away": Another puzzle. *The American Economic Review*, 92(5), 1618–1635.
+Bouman, S., & Jacobsen, B. (2002). The Halloween indicator, "Sell in May and go away": Another puzzle. _The American Economic Review_, 92(5), 1618–1635.
 
-Brown, S. J., Goetzmann, W., Ibbotson, R. G., & Ross, S. A. (1992). Survivorship bias in performance studies. *Review of Financial Studies*, 5(4), 553–580.
+Brown, S. J., Goetzmann, W., Ibbotson, R. G., & Ross, S. A. (1992). Survivorship bias in performance studies. _Review of Financial Studies_, 5(4), 553–580.
 
-Brown, S. J., & Warner, J. B. (1985). Using daily stock returns: The case of event studies. *Journal of Financial Economics*, 14(1), 3–31.
+Brown, S. J., & Warner, J. B. (1985). Using daily stock returns: The case of event studies. _Journal of Financial Economics_, 14(1), 3–31.
 
-Cao, M., & Wei, J. (2005). Stock market returns: A note on temperature anomaly. *Journal of Banking and Finance*, 29(6), 1559–1573.
+Cao, M., & Wei, J. (2005). Stock market returns: A note on temperature anomaly. _Journal of Banking and Finance_, 29(6), 1559–1573.
 
-Elton, E. J., Gruber, M. J., & Blake, C. R. (1996). Survivorship bias and mutual fund performance. *Review of Financial Studies*, 9(4), 1097–1120.
+Elton, E. J., Gruber, M. J., & Blake, C. R. (1996). Survivorship bias and mutual fund performance. _Review of Financial Studies_, 9(4), 1097–1120.
 
-Haugen, R. A., & Lakonishok, J. (1988). *The Incredible January Effect: The Stock Market's Unsolved Mystery*. Dow Jones-Irwin.
+Haugen, R. A., & Lakonishok, J. (1988). _The Incredible January Effect: The Stock Market's Unsolved Mystery_. Dow Jones-Irwin.
 
-Heston, S. L., & Sadka, R. (2008). Seasonality in the cross-section of stock returns. *Journal of Financial Economics*, 87(2), 418–445.
+Heston, S. L., & Sadka, R. (2008). Seasonality in the cross-section of stock returns. _Journal of Financial Economics_, 87(2), 418–445.
 
-Keim, D. B. (1983). Size-related anomalies and stock return seasonality: Further empirical evidence. *Journal of Financial Economics*, 12(1), 13–32.
+Keim, D. B. (1983). Size-related anomalies and stock return seasonality: Further empirical evidence. _Journal of Financial Economics_, 12(1), 13–32.
 
-Kim, C. W., & Park, J. (1994). Holiday effects and stock returns: Further evidence. *Journal of Financial and Quantitative Analysis*, 29(1), 145–157.
+Kim, C. W., & Park, J. (1994). Holiday effects and stock returns: Further evidence. _Journal of Financial and Quantitative Analysis_, 29(1), 145–157.
 
-Lakonishok, J., & Smidt, S. (1988). Are seasonal anomalies real? A ninety-year perspective. *Review of Financial Studies*, 1(4), 403–425.
+Lakonishok, J., & Smidt, S. (1988). Are seasonal anomalies real? A ninety-year perspective. _Review of Financial Studies_, 1(4), 403–425.
 
-MacKinlay, A. C. (1997). Event studies in economics and finance. *Journal of Economic Literature*, 35(1), 13–39.
+MacKinlay, A. C. (1997). Event studies in economics and finance. _Journal of Economic Literature_, 35(1), 13–39.
 
-Rozeff, M. S., & Kinney, W. R. (1976). Capital market seasonality: The case of stock returns. *Journal of Financial Economics*, 3(4), 379–402.
+Rozeff, M. S., & Kinney, W. R. (1976). Capital market seasonality: The case of stock returns. _Journal of Financial Economics_, 3(4), 379–402.
 
 ---
 
@@ -429,4 +429,4 @@ All cached score values for any (stock, month, window, COVID-flag) tuple are det
 
 ---
 
-*Word count: approximately 4,800 words including appendices. Tables and code blocks excluded from the prose count.*
+_Word count: approximately 4,800 words including appendices. Tables and code blocks excluded from the prose count._
