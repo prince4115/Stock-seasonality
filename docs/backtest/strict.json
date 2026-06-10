@@ -1,0 +1,3550 @@
+{
+  "config": {
+    "windowYears": 10,
+    "topK": 5,
+    "minSampleSize": 8,
+    "minPctPositive": 0.7,
+    "costBpsPerSide": 10,
+    "startMonth": "2017-01",
+    "endMonth": "2026-05"
+  },
+  "strategyMetrics": {
+    "totalReturn": -0.2801369509668593,
+    "cagr": -0.034303415494006395,
+    "sharpe": -0.0168184118440823,
+    "maxDrawdown": 0.5155061173482364,
+    "hitRate": 0.3805309734513274,
+    "nMonths": 113
+  },
+  "spyMetrics": {
+    "totalReturn": 2.387596143273343,
+    "cagr": 0.1383391632156401,
+    "sharpe": 0.8793105737258664,
+    "maxDrawdown": 0.24575481453625975,
+    "hitRate": 0.6902654867256637,
+    "nMonths": 113
+  },
+  "months": [
+    {
+      "month": "2017-01",
+      "picks": [],
+      "grossReturn": 0,
+      "netReturn": 0,
+      "spyReturn": 0.010166780781501957,
+      "missedPicks": []
+    },
+    {
+      "month": "2017-02",
+      "picks": [],
+      "grossReturn": 0,
+      "netReturn": 0,
+      "spyReturn": 0.038880808114319904,
+      "missedPicks": []
+    },
+    {
+      "month": "2017-03",
+      "picks": [],
+      "grossReturn": 0,
+      "netReturn": 0,
+      "spyReturn": -0.01257150269489292,
+      "missedPicks": []
+    },
+    {
+      "month": "2017-04",
+      "picks": [],
+      "grossReturn": 0,
+      "netReturn": 0,
+      "spyReturn": 0.011685879243358085,
+      "missedPicks": []
+    },
+    {
+      "month": "2017-05",
+      "picks": [],
+      "grossReturn": 0,
+      "netReturn": 0,
+      "spyReturn": 0.011563516392628191,
+      "missedPicks": []
+    },
+    {
+      "month": "2017-06",
+      "picks": [],
+      "grossReturn": 0,
+      "netReturn": 0,
+      "spyReturn": -0.00156495112995289,
+      "missedPicks": []
+    },
+    {
+      "month": "2017-07",
+      "picks": [],
+      "grossReturn": 0,
+      "netReturn": 0,
+      "spyReturn": 0.01882660448512263,
+      "missedPicks": []
+    },
+    {
+      "month": "2017-08",
+      "picks": [],
+      "grossReturn": 0,
+      "netReturn": 0,
+      "spyReturn": 0.0006873680014186695,
+      "missedPicks": []
+    },
+    {
+      "month": "2017-09",
+      "picks": [],
+      "grossReturn": 0,
+      "netReturn": 0,
+      "spyReturn": 0.018708973905339342,
+      "missedPicks": []
+    },
+    {
+      "month": "2017-10",
+      "picks": [],
+      "grossReturn": 0,
+      "netReturn": 0,
+      "spyReturn": 0.01914251166051397,
+      "missedPicks": []
+    },
+    {
+      "month": "2017-11",
+      "picks": [],
+      "grossReturn": 0,
+      "netReturn": 0,
+      "spyReturn": 0.029205028802849243,
+      "missedPicks": []
+    },
+    {
+      "month": "2017-12",
+      "picks": [],
+      "grossReturn": 0,
+      "netReturn": 0,
+      "spyReturn": 0.014233306171949964,
+      "missedPicks": []
+    },
+    {
+      "month": "2018-01",
+      "picks": [],
+      "grossReturn": 0,
+      "netReturn": 0,
+      "spyReturn": 0.04885185592407182,
+      "missedPicks": []
+    },
+    {
+      "month": "2018-02",
+      "picks": [],
+      "grossReturn": 0,
+      "netReturn": 0,
+      "spyReturn": -0.035265005634690254,
+      "missedPicks": []
+    },
+    {
+      "month": "2018-03",
+      "picks": [],
+      "grossReturn": 0,
+      "netReturn": 0,
+      "spyReturn": -0.013059705799997155,
+      "missedPicks": []
+    },
+    {
+      "month": "2018-04",
+      "picks": [],
+      "grossReturn": 0,
+      "netReturn": 0,
+      "spyReturn": 0.027343428742512655,
+      "missedPicks": []
+    },
+    {
+      "month": "2018-05",
+      "picks": [],
+      "grossReturn": 0,
+      "netReturn": 0,
+      "spyReturn": 0.02249200816187324,
+      "missedPicks": []
+    },
+    {
+      "month": "2018-06",
+      "picks": [],
+      "grossReturn": 0,
+      "netReturn": 0,
+      "spyReturn": -0.004027415609959123,
+      "missedPicks": []
+    },
+    {
+      "month": "2018-07",
+      "picks": [],
+      "grossReturn": 0,
+      "netReturn": 0,
+      "spyReturn": 0.034834731817385285,
+      "missedPicks": []
+    },
+    {
+      "month": "2018-08",
+      "picks": [],
+      "grossReturn": 0,
+      "netReturn": 0,
+      "spyReturn": 0.033646873463245165,
+      "missedPicks": []
+    },
+    {
+      "month": "2018-09",
+      "picks": [],
+      "grossReturn": 0,
+      "netReturn": 0,
+      "spyReturn": 0.007680867836741054,
+      "missedPicks": []
+    },
+    {
+      "month": "2018-10",
+      "picks": [],
+      "grossReturn": 0,
+      "netReturn": 0,
+      "spyReturn": -0.07232714435029729,
+      "missedPicks": []
+    },
+    {
+      "month": "2018-11",
+      "picks": [],
+      "grossReturn": 0,
+      "netReturn": 0,
+      "spyReturn": 0.007824644031683144,
+      "missedPicks": []
+    },
+    {
+      "month": "2018-12",
+      "picks": [],
+      "grossReturn": 0,
+      "netReturn": 0,
+      "spyReturn": -0.09996598572547248,
+      "missedPicks": []
+    },
+    {
+      "month": "2019-01",
+      "picks": [],
+      "grossReturn": 0,
+      "netReturn": 0,
+      "spyReturn": 0.07894317515920067,
+      "missedPicks": []
+    },
+    {
+      "month": "2019-02",
+      "picks": [],
+      "grossReturn": 0,
+      "netReturn": 0,
+      "spyReturn": 0.031918758474090106,
+      "missedPicks": []
+    },
+    {
+      "month": "2019-03",
+      "picks": [],
+      "grossReturn": 0,
+      "netReturn": 0,
+      "spyReturn": 0.011783282199944074,
+      "missedPicks": []
+    },
+    {
+      "month": "2019-04",
+      "picks": [],
+      "grossReturn": 0,
+      "netReturn": 0,
+      "spyReturn": 0.028653761619607653,
+      "missedPicks": []
+    },
+    {
+      "month": "2019-05",
+      "picks": [
+        {
+          "ticker": "LYV",
+          "score": 0.07742200696894173,
+          "pctPositive": 1,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "NFLX",
+          "score": 0.07419240997584911,
+          "pctPositive": 0.875,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "EXPE",
+          "score": 0.03896570931207469,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "DAL",
+          "score": 0.027564743230225546,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "POOL",
+          "score": 0.02450098445616848,
+          "pctPositive": 0.875,
+          "sampleSize": 8
+        }
+      ],
+      "grossReturn": -0.07008743652597306,
+      "netReturn": -0.07208743652597306,
+      "spyReturn": -0.056680393178658216,
+      "missedPicks": []
+    },
+    {
+      "month": "2019-06",
+      "picks": [
+        {
+          "ticker": "UAA",
+          "score": 0.07425396685607474,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "MNST",
+          "score": 0.06112789247016713,
+          "pctPositive": 0.875,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "GAP",
+          "score": 0.04563206372786608,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "ULTA",
+          "score": 0.045409099473795594,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "TXRH",
+          "score": 0.0445998885088407,
+          "pctPositive": 1,
+          "sampleSize": 8
+        }
+      ],
+      "grossReturn": 0.02060600143974447,
+      "netReturn": 0.018606001439744467,
+      "spyReturn": 0.07231331743134624,
+      "missedPicks": []
+    },
+    {
+      "month": "2019-07",
+      "picks": [
+        {
+          "ticker": "VFC",
+          "score": 0.055953051817279026,
+          "pctPositive": 0.875,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "AMZN",
+          "score": 0.054167276194091035,
+          "pctPositive": 0.875,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "TGT",
+          "score": 0.04581328915084473,
+          "pctPositive": 0.875,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "URBN",
+          "score": 0.04505631044835624,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "EXPE",
+          "score": 0.04341070504810543,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        }
+      ],
+      "grossReturn": -0.0009351510056421437,
+      "netReturn": -0.002935151005642144,
+      "spyReturn": 0.0059864937898630515,
+      "missedPicks": []
+    },
+    {
+      "month": "2019-08",
+      "picks": [
+        {
+          "ticker": "NFLX",
+          "score": 0.04393459399756411,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "TJX",
+          "score": 0.03752168236035058,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "ROST",
+          "score": 0.035220604434357795,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "STZ",
+          "score": 0.034038927215843076,
+          "pctPositive": 0.875,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "RL",
+          "score": 0.032534279283464494,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        }
+      ],
+      "grossReturn": -0.010377818384986737,
+      "netReturn": -0.01237781838498674,
+      "spyReturn": -0.00810614849791027,
+      "missedPicks": []
+    },
+    {
+      "month": "2019-09",
+      "picks": [
+        {
+          "ticker": "ULTA",
+          "score": 0.07451689353121783,
+          "pctPositive": 0.875,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "BBWI",
+          "score": 0.05793756350230171,
+          "pctPositive": 0.875,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "DPZ",
+          "score": 0.03984933284503279,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "LUV",
+          "score": 0.03695720447090944,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "DAL",
+          "score": 0.030514528870570972,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        }
+      ],
+      "grossReturn": 0.08569532185592574,
+      "netReturn": 0.08369532185592574,
+      "spyReturn": 0.0254540654282574,
+      "missedPicks": []
+    },
+    {
+      "month": "2019-10",
+      "picks": [
+        {
+          "ticker": "AAL",
+          "score": 0.10287684325809092,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "DAL",
+          "score": 0.0890672369030196,
+          "pctPositive": 0.875,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "RCL",
+          "score": 0.08827934294359893,
+          "pctPositive": 0.875,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "LYV",
+          "score": 0.07405116067317954,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "PSKY",
+          "score": 0.0697347196052096,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        }
+      ],
+      "grossReturn": 0.019281382234024584,
+      "netReturn": 0.017281382234024582,
+      "spyReturn": 0.03440832918772068,
+      "missedPicks": []
+    },
+    {
+      "month": "2019-11",
+      "picks": [
+        {
+          "ticker": "DECK",
+          "score": 0.08674253043445283,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "LUV",
+          "score": 0.08048358658221248,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "MNST",
+          "score": 0.0802645030335932,
+          "pctPositive": 0.875,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "BBWI",
+          "score": 0.07839367175741786,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "DLTR",
+          "score": 0.07607601620037593,
+          "pctPositive": 0.875,
+          "sampleSize": 8
+        }
+      ],
+      "grossReturn": 0.020540968227925345,
+      "netReturn": 0.018540968227925343,
+      "spyReturn": 0.026687164790888694,
+      "missedPicks": []
+    },
+    {
+      "month": "2019-12",
+      "picks": [
+        {
+          "ticker": "HSY",
+          "score": 0.028852464653231054,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "WEN",
+          "score": 0.027298347829553357,
+          "pctPositive": 0.875,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "DG",
+          "score": 0.025134643236561977,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "AAL",
+          "score": 0.02248268444242288,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "DIS",
+          "score": 0.020901707197621886,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        }
+      ],
+      "grossReturn": -0.0015063171829048081,
+      "netReturn": -0.0035063171829048086,
+      "spyReturn": 0.03787179540776918,
+      "missedPicks": []
+    },
+    {
+      "month": "2020-01",
+      "picks": [
+        {
+          "ticker": "NFLX",
+          "score": 0.3007143817651733,
+          "pctPositive": 0.875,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "CMG",
+          "score": 0.07922240424192109,
+          "pctPositive": 1,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "DPZ",
+          "score": 0.06937019504085602,
+          "pctPositive": 0.875,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "AMZN",
+          "score": 0.06492785695594663,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "LVMUY",
+          "score": 0.06128186433928156,
+          "pctPositive": 0.875,
+          "sampleSize": 8
+        }
+      ],
+      "grossReturn": -0.00007377190276858514,
+      "netReturn": -0.002073771902768584,
+      "spyReturn": -0.0096649740346804,
+      "missedPicks": []
+    },
+    {
+      "month": "2020-02",
+      "picks": [
+        {
+          "ticker": "BKNG",
+          "score": 0.10764252580113472,
+          "pctPositive": 0.875,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "MAT",
+          "score": 0.07567334395584445,
+          "pctPositive": 0.875,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "M",
+          "score": 0.07394825161812121,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "GAP",
+          "score": 0.07249197542066727,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "BBY",
+          "score": 0.07220793570701774,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        }
+      ],
+      "grossReturn": -0.149731154756322,
+      "netReturn": -0.151731154756322,
+      "spyReturn": -0.08595563757054682,
+      "missedPicks": []
+    },
+    {
+      "month": "2020-03",
+      "picks": [
+        {
+          "ticker": "PRDSY",
+          "score": 0.06337946339424254,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "IPAR",
+          "score": 0.06004157550927158,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "ULTA",
+          "score": 0.05996056271004195,
+          "pctPositive": 0.875,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "DRI",
+          "score": 0.05318551286778947,
+          "pctPositive": 0.875,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "YUM",
+          "score": 0.04101761580738479,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        }
+      ],
+      "grossReturn": -0.2772917420634074,
+      "netReturn": -0.2792917420634074,
+      "spyReturn": -0.16119712472141515,
+      "missedPicks": []
+    },
+    {
+      "month": "2020-04",
+      "picks": [
+        {
+          "ticker": "HAS",
+          "score": 0.06607555629277452,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "AMZN",
+          "score": 0.06374935064929775,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "LRLCY",
+          "score": 0.06204886001384167,
+          "pctPositive": 1,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "EXPE",
+          "score": 0.05331830249839093,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "LVMUY",
+          "score": 0.05257558522430577,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        }
+      ],
+      "grossReturn": 0.19166233781137854,
+      "netReturn": 0.18966233781137853,
+      "spyReturn": 0.18009359032990657,
+      "missedPicks": []
+    },
+    {
+      "month": "2020-05",
+      "picks": [
+        {
+          "ticker": "LYV",
+          "score": 0.06376271416265494,
+          "pctPositive": 0.8888888888888888,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "NFLX",
+          "score": 0.05552727855991979,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "DPZ",
+          "score": 0.024538580812588136,
+          "pctPositive": 0.8888888888888888,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "POOL",
+          "score": 0.020998344626855046,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "DRI",
+          "score": 0.0072333913208868185,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        }
+      ],
+      "grossReturn": 0.12674861224773826,
+      "netReturn": 0.12474861224773826,
+      "spyReturn": 0.07613431357932086,
+      "missedPicks": []
+    },
+    {
+      "month": "2020-06",
+      "picks": [
+        {
+          "ticker": "UAA",
+          "score": 0.0743946070352211,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "MNST",
+          "score": 0.0561402879511944,
+          "pctPositive": 0.8888888888888888,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "ULTA",
+          "score": 0.04583854103402909,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "LYV",
+          "score": 0.04426173183268449,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "CPB",
+          "score": 0.04227422635856778,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        }
+      ],
+      "grossReturn": -0.061552565551612815,
+      "netReturn": -0.06355256555161282,
+      "spyReturn": 0.013637576877511909,
+      "missedPicks": []
+    },
+    {
+      "month": "2020-07",
+      "picks": [
+        {
+          "ticker": "KSS",
+          "score": 0.05154706947017694,
+          "pctPositive": 0.8888888888888888,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "VFC",
+          "score": 0.048553607029787865,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "URBN",
+          "score": 0.04502298511134479,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "AMZN",
+          "score": 0.04494574598594827,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "TGT",
+          "score": 0.040032798537234744,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        }
+      ],
+      "grossReturn": 0.039818235872564015,
+      "netReturn": 0.03781823587256401,
+      "spyReturn": 0.05152634903633522,
+      "missedPicks": []
+    },
+    {
+      "month": "2020-08",
+      "picks": [
+        {
+          "ticker": "TJX",
+          "score": 0.038882064891935415,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "STZ",
+          "score": 0.03688128896341171,
+          "pctPositive": 0.8888888888888888,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "ROST",
+          "score": 0.033924860622961864,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "PG",
+          "score": 0.010063864134993526,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        }
+      ],
+      "grossReturn": 0.05378784449083292,
+      "netReturn": 0.051787844490832916,
+      "spyReturn": 0.06241062508247549,
+      "missedPicks": []
+    },
+    {
+      "month": "2020-09",
+      "picks": [
+        {
+          "ticker": "BBWI",
+          "score": 0.0776314701687484,
+          "pctPositive": 0.8888888888888888,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "ULTA",
+          "score": 0.07243373410410382,
+          "pctPositive": 0.8888888888888888,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "DPZ",
+          "score": 0.04441352897821824,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "LUV",
+          "score": 0.03853832337010857,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "DLTR",
+          "score": 0.031397666506954046,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        }
+      ],
+      "grossReturn": -0.005301600364111975,
+      "netReturn": -0.007301600364111975,
+      "spyReturn": -0.04642484383437723,
+      "missedPicks": []
+    },
+    {
+      "month": "2020-10",
+      "picks": [
+        {
+          "ticker": "AAL",
+          "score": 0.10496183864361044,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "RCL",
+          "score": 0.08290858675099849,
+          "pctPositive": 0.8888888888888888,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "DAL",
+          "score": 0.07620687903493166,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "LYV",
+          "score": 0.07296899019148309,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "CFRUY",
+          "score": 0.06566275961076366,
+          "pctPositive": 0.8888888888888888,
+          "sampleSize": 9
+        }
+      ],
+      "grossReturn": -0.08653400170527906,
+      "netReturn": -0.08853400170527906,
+      "spyReturn": -0.031153735500209556,
+      "missedPicks": []
+    },
+    {
+      "month": "2020-11",
+      "picks": [
+        {
+          "ticker": "DECK",
+          "score": 0.08643594402500078,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "BBWI",
+          "score": 0.08215200230621383,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "MNST",
+          "score": 0.07839807677060136,
+          "pctPositive": 0.8888888888888888,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "LUV",
+          "score": 0.07426641255700057,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "SBUX",
+          "score": 0.06593546127204769,
+          "pctPositive": 0.8888888888888888,
+          "sampleSize": 9
+        }
+      ],
+      "grossReturn": 0.12289665095351676,
+      "netReturn": 0.12089665095351676,
+      "spyReturn": 0.09648664060663886,
+      "missedPicks": []
+    },
+    {
+      "month": "2020-12",
+      "picks": [
+        {
+          "ticker": "H",
+          "score": 0.025889812141272978,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "WEN",
+          "score": 0.025376795060215965,
+          "pctPositive": 0.8888888888888888,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "DG",
+          "score": 0.02327575165870484,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "AAL",
+          "score": 0.022358781982737788,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "PSKY",
+          "score": 0.016002379155257804,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        }
+      ],
+      "grossReturn": 0.01971204519112226,
+      "netReturn": 0.017712045191122263,
+      "spyReturn": 0.025828316720300504,
+      "missedPicks": []
+    },
+    {
+      "month": "2021-01",
+      "picks": [
+        {
+          "ticker": "NFLX",
+          "score": 0.272449417834198,
+          "pctPositive": 0.8888888888888888,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "CMG",
+          "score": 0.0715294853471066,
+          "pctPositive": 1,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "AMZN",
+          "score": 0.06419470789273568,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "DPZ",
+          "score": 0.057250536625811366,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "LUV",
+          "score": 0.04941797993898973,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        }
+      ],
+      "grossReturn": 0.019775005436669713,
+      "netReturn": 0.017775005436669718,
+      "spyReturn": 0.0034711501206162146,
+      "missedPicks": []
+    },
+    {
+      "month": "2021-02",
+      "picks": [
+        {
+          "ticker": "DPZ",
+          "score": 0.09089477589115123,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "BKNG",
+          "score": 0.08702005871537427,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "MAT",
+          "score": 0.04693717429939696,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "EL",
+          "score": 0.04646880309304921,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "NFLX",
+          "score": 0.04517616998674347,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        }
+      ],
+      "grossReturn": 0.07831061610672956,
+      "netReturn": 0.07631061610672955,
+      "spyReturn": 0.010977236981354593,
+      "missedPicks": []
+    },
+    {
+      "month": "2021-03",
+      "picks": [
+        {
+          "ticker": "POOL",
+          "score": 0.02847185273415267,
+          "pctPositive": 0.8888888888888888,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "LRLCY",
+          "score": 0.028258204155273123,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "GIS",
+          "score": 0.027640621153998905,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "WMT",
+          "score": 0.020025351371642963,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "ULTA",
+          "score": 0.01698782065962921,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        }
+      ],
+      "grossReturn": 0.029637600155654698,
+      "netReturn": 0.027637600155654696,
+      "spyReturn": 0.020658482646064912,
+      "missedPicks": []
+    },
+    {
+      "month": "2021-04",
+      "picks": [
+        {
+          "ticker": "FUN",
+          "score": 0.10108414506679958,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "AMZN",
+          "score": 0.08964937289204222,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "EXPE",
+          "score": 0.0879496168781808,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "PRKS",
+          "score": 0.08185805242986155,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "LRLCY",
+          "score": 0.07197614632987574,
+          "pctPositive": 1,
+          "sampleSize": 9
+        }
+      ],
+      "grossReturn": 0.04952554746112346,
+      "netReturn": 0.04752554746112346,
+      "spyReturn": 0.041661521960128796,
+      "missedPicks": []
+    },
+    {
+      "month": "2021-05",
+      "picks": [
+        {
+          "ticker": "LYV",
+          "score": 0.07679378398551218,
+          "pctPositive": 0.9,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "NFLX",
+          "score": 0.051048550752089236,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "POOL",
+          "score": 0.043768001885564775,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "MNST",
+          "score": 0.039164859603584866,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "EXPE",
+          "score": 0.03881084371146246,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": 0.01645883062603333,
+      "netReturn": 0.014458830626033328,
+      "spyReturn": 0.004399750373603021,
+      "missedPicks": []
+    },
+    {
+      "month": "2021-06",
+      "picks": [
+        {
+          "ticker": "UAA",
+          "score": 0.07213873164487396,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "GAP",
+          "score": 0.059745258769578445,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "BBY",
+          "score": 0.052007315471003124,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "AMZN",
+          "score": 0.04962775102762658,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "MNST",
+          "score": 0.04602151169748575,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.0029241475817232943,
+      "netReturn": -0.004924147581723296,
+      "spyReturn": 0.023328979964340163,
+      "missedPicks": []
+    },
+    {
+      "month": "2021-07",
+      "picks": [
+        {
+          "ticker": "AMZN",
+          "score": 0.05038551411058743,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "URBN",
+          "score": 0.05034805047803235,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "GAP",
+          "score": 0.05013831259653332,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "VFC",
+          "score": 0.043302210019950854,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "TGT",
+          "score": 0.041846568452797404,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.04312341450747177,
+      "netReturn": -0.045123414507471774,
+      "spyReturn": 0.01877189219350025,
+      "missedPicks": []
+    },
+    {
+      "month": "2021-08",
+      "picks": [
+        {
+          "ticker": "URBN",
+          "score": 0.07940474001557635,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "LOW",
+          "score": 0.041570361631961913,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "TJX",
+          "score": 0.04058260265232871,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "STZ",
+          "score": 0.040116038662991065,
+          "pctPositive": 0.9,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "FUN",
+          "score": 0.039000646447933184,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": 0.008044000213354944,
+      "netReturn": 0.006044000213354941,
+      "spyReturn": 0.031924850228636836,
+      "missedPicks": []
+    },
+    {
+      "month": "2021-09",
+      "picks": [
+        {
+          "ticker": "BBWI",
+          "score": 0.0707243774977974,
+          "pctPositive": 0.9,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "ULTA",
+          "score": 0.061368646158776616,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "SIG",
+          "score": 0.05305653077537274,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "DPZ",
+          "score": 0.04386640635891701,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "LUV",
+          "score": 0.03360299010395647,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.034594047534591534,
+      "netReturn": -0.036594047534591535,
+      "spyReturn": -0.04711195689232529,
+      "missedPicks": []
+    },
+    {
+      "month": "2021-10",
+      "picks": [
+        {
+          "ticker": "AAL",
+          "score": 0.08413179150420964,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "IPAR",
+          "score": 0.07771457302947767,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "DAL",
+          "score": 0.06710710002861792,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "SIG",
+          "score": 0.06560497253256899,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "RCL",
+          "score": 0.06068943499695225,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.008924709419465651,
+      "netReturn": -0.010924709419465653,
+      "spyReturn": 0.05759494176963204,
+      "missedPicks": []
+    },
+    {
+      "month": "2021-11",
+      "picks": [
+        {
+          "ticker": "BBWI",
+          "score": 0.09147161789561467,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "UAL",
+          "score": 0.08964478491755694,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "LUV",
+          "score": 0.08751683427331133,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "FUN",
+          "score": 0.0850785562112063,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "DAL",
+          "score": 0.08224169104491191,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.05453784834098121,
+      "netReturn": -0.05653784834098121,
+      "spyReturn": -0.009738245468435122,
+      "missedPicks": []
+    },
+    {
+      "month": "2021-12",
+      "picks": [
+        {
+          "ticker": "PRKS",
+          "score": 0.04199978801919148,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "DIS",
+          "score": 0.03455907778692907,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "LOW",
+          "score": 0.03454701007802995,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "AAL",
+          "score": 0.0306344665034549,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "NFLX",
+          "score": 0.02943944178188997,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": 0.0695205369745007,
+      "netReturn": 0.0675205369745007,
+      "spyReturn": 0.05799912796170155,
+      "missedPicks": []
+    },
+    {
+      "month": "2022-01",
+      "picks": [
+        {
+          "ticker": "NFLX",
+          "score": 0.24702714180877586,
+          "pctPositive": 0.9,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "CMG",
+          "score": 0.07657254202056482,
+          "pctPositive": 1,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "AMZN",
+          "score": 0.058389366147890774,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "BC",
+          "score": 0.053901611621610244,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "DPZ",
+          "score": 0.049222450756629295,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.16042782734557712,
+      "netReturn": -0.16242782734557712,
+      "spyReturn": -0.05819444760966446,
+      "missedPicks": []
+    },
+    {
+      "month": "2022-02",
+      "picks": [
+        {
+          "ticker": "COTY",
+          "score": 0.12780175505997438,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "BKNG",
+          "score": 0.09530154140867521,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "DPZ",
+          "score": 0.07509863016471724,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "KSS",
+          "score": 0.06822694004213718,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "GAP",
+          "score": 0.06399674969632954,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.07462380637428365,
+      "netReturn": -0.07662380637428365,
+      "spyReturn": -0.03603052393142546,
+      "missedPicks": []
+    },
+    {
+      "month": "2022-03",
+      "picks": [
+        {
+          "ticker": "PRDSY",
+          "score": 0.047568049392555864,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "GIS",
+          "score": 0.036897004829234,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "LRLCY",
+          "score": 0.029294674037549408,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "POOL",
+          "score": 0.029106427804022256,
+          "pctPositive": 0.9,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "SJM",
+          "score": 0.02867037564336091,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": 0.019335514011482105,
+      "netReturn": 0.017335514011482103,
+      "spyReturn": 0.053637514522475886,
+      "missedPicks": []
+    },
+    {
+      "month": "2022-04",
+      "picks": [
+        {
+          "ticker": "FUN",
+          "score": 0.09041154529933082,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "AMZN",
+          "score": 0.09037820258112778,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "CCL",
+          "score": 0.084780033645694,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "PRKS",
+          "score": 0.08081423637569339,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "EXPE",
+          "score": 0.07932518527796066,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.11246962346291803,
+      "netReturn": -0.11446962346291803,
+      "spyReturn": -0.09034689431223773,
+      "missedPicks": []
+    },
+    {
+      "month": "2022-05",
+      "picks": [
+        {
+          "ticker": "LYV",
+          "score": 0.08390330356732265,
+          "pctPositive": 0.9,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "POOL",
+          "score": 0.043861880416063974,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "NFLX",
+          "score": 0.03824680419898453,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "EXPE",
+          "score": 0.037014380026767345,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "DAL",
+          "score": 0.030444348342755567,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.08338090364346434,
+      "netReturn": -0.08538090364346435,
+      "spyReturn": -0.003739810557045783,
+      "missedPicks": []
+    },
+    {
+      "month": "2022-06",
+      "picks": [
+        {
+          "ticker": "GAP",
+          "score": 0.06557834323709898,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "BBY",
+          "score": 0.050795885065971026,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "AMZN",
+          "score": 0.05022604596883862,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "UAA",
+          "score": 0.04786696966848052,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "POOL",
+          "score": 0.03770909828523561,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.16873112341271745,
+      "netReturn": -0.17073112341271746,
+      "spyReturn": -0.07497834748069693,
+      "missedPicks": []
+    },
+    {
+      "month": "2022-07",
+      "picks": [
+        {
+          "ticker": "CMG",
+          "score": 0.0502965676661455,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "COST",
+          "score": 0.04962923914144463,
+          "pctPositive": 0.9,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "TGT",
+          "score": 0.04163966388200609,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "AMZN",
+          "score": 0.041096002726806156,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "PG",
+          "score": 0.03924713459919947,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": 0.1298753353759148,
+      "netReturn": 0.1278753353759148,
+      "spyReturn": 0.08065782895204691,
+      "missedPicks": []
+    },
+    {
+      "month": "2022-08",
+      "picks": [
+        {
+          "ticker": "URBN",
+          "score": 0.08812290853903762,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "SIG",
+          "score": 0.08185099975795736,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "BBY",
+          "score": 0.058824990763205985,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "NFLX",
+          "score": 0.05455497234903493,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "LOW",
+          "score": 0.05384169534154436,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.00932069994516074,
+      "netReturn": -0.01132069994516074,
+      "spyReturn": -0.03795311348049147,
+      "missedPicks": []
+    },
+    {
+      "month": "2022-09",
+      "picks": [
+        {
+          "ticker": "SIG",
+          "score": 0.06356522809515483,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "BBWI",
+          "score": 0.061993811281173726,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "ULTA",
+          "score": 0.046480718179602684,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "LUV",
+          "score": 0.042023436874767436,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "RCL",
+          "score": 0.04186101573847674,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.08861988142228215,
+      "netReturn": -0.09061988142228215,
+      "spyReturn": -0.09528483794089913,
+      "missedPicks": []
+    },
+    {
+      "month": "2022-10",
+      "picks": [
+        {
+          "ticker": "IPAR",
+          "score": 0.06707429733984793,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "MAT",
+          "score": 0.05201558347371856,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "SIG",
+          "score": 0.04608688440308117,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "POOL",
+          "score": 0.043778265022629104,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "CFRUY",
+          "score": 0.03575001900209469,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": 0.020341213341928913,
+      "netReturn": 0.01834121334192891,
+      "spyReturn": 0.05346266653934488,
+      "missedPicks": []
+    },
+    {
+      "month": "2022-11",
+      "picks": [
+        {
+          "ticker": "BBWI",
+          "score": 0.09780340853577245,
+          "pctPositive": 0.9,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "UAL",
+          "score": 0.08251547482638859,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "DLTR",
+          "score": 0.08053479895861501,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "LUV",
+          "score": 0.07883491608804219,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "DECK",
+          "score": 0.07874904284307871,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": 0.08346386229265931,
+      "netReturn": 0.08146386229265931,
+      "spyReturn": 0.06023106351837884,
+      "missedPicks": []
+    },
+    {
+      "month": "2022-12",
+      "picks": [
+        {
+          "ticker": "CCL",
+          "score": 0.051452061901292534,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "PRKS",
+          "score": 0.05133778080888672,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "DAL",
+          "score": 0.046041498606468514,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "H",
+          "score": 0.04135138258300216,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "AAL",
+          "score": 0.03832229399762009,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.10313617812386551,
+      "netReturn": -0.10513617812386551,
+      "spyReturn": -0.05693450333395009,
+      "missedPicks": []
+    },
+    {
+      "month": "2023-01",
+      "picks": [
+        {
+          "ticker": "NFLX",
+          "score": 0.1521407412403541,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "CMG",
+          "score": 0.05681738374450733,
+          "pctPositive": 0.9,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "WBD",
+          "score": 0.04001546727591671,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "AMZN",
+          "score": 0.037557431517044604,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "DPZ",
+          "score": 0.03291326312841892,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": 0.23922104065679967,
+      "netReturn": 0.23722104065679966,
+      "spyReturn": 0.06738069558109042,
+      "missedPicks": []
+    },
+    {
+      "month": "2023-02",
+      "picks": [
+        {
+          "ticker": "COTY",
+          "score": 0.12138063434347002,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        },
+        {
+          "ticker": "BKNG",
+          "score": 0.0663992427393572,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "MAT",
+          "score": 0.0640394913775698,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "MAR",
+          "score": 0.0624708058086205,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "H",
+          "score": 0.062261648775702505,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": 0.003921172116186811,
+      "netReturn": 0.001921172116186809,
+      "spyReturn": -0.03539417523867,
+      "missedPicks": []
+    },
+    {
+      "month": "2023-03",
+      "picks": [
+        {
+          "ticker": "PRDSY",
+          "score": 0.03564369448740642,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "GIS",
+          "score": 0.0348904700896258,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "SJM",
+          "score": 0.02860203890369597,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "LRLCY",
+          "score": 0.02827193311159598,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "WMT",
+          "score": 0.02703841290822865,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": 0.07872722586842136,
+      "netReturn": 0.07672722586842136,
+      "spyReturn": 0.04107162906393541,
+      "missedPicks": []
+    },
+    {
+      "month": "2023-04",
+      "picks": [
+        {
+          "ticker": "FUN",
+          "score": 0.08463406697988833,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "ULTA",
+          "score": 0.06770466046561606,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "HAS",
+          "score": 0.06735067929803731,
+          "pctPositive": 0.9,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "PRKS",
+          "score": 0.06598502789299134,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "LRLCY",
+          "score": 0.06161613564544738,
+          "pctPositive": 0.9,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": 0.005731241093416386,
+      "netReturn": 0.0037312410934163846,
+      "spyReturn": 0.012118297445785882,
+      "missedPicks": []
+    },
+    {
+      "month": "2023-05",
+      "picks": [
+        {
+          "ticker": "LYV",
+          "score": 0.06843587256054527,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "NFLX",
+          "score": 0.0592596297394282,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "PRDSY",
+          "score": 0.04552954156105511,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "DPZ",
+          "score": 0.040691238896531846,
+          "pctPositive": 0.9,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "POOL",
+          "score": 0.03978885277158187,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": 0.03148673872291822,
+      "netReturn": 0.029486738722918217,
+      "spyReturn": 0.005631721538627763,
+      "missedPicks": []
+    },
+    {
+      "month": "2023-06",
+      "picks": [
+        {
+          "ticker": "COTY",
+          "score": 0.05760982950426693,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "LULU",
+          "score": 0.0405667183500953,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "NKE",
+          "score": 0.03873904053838565,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "DPZ",
+          "score": 0.03748771691539085,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "DG",
+          "score": 0.03727750523910598,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": 0.105795718378547,
+      "netReturn": 0.103795718378547,
+      "spyReturn": 0.05477835601279019,
+      "missedPicks": []
+    },
+    {
+      "month": "2023-07",
+      "picks": [
+        {
+          "ticker": "CMG",
+          "score": 0.09376026227799181,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "AMZN",
+          "score": 0.06253495246263639,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "COST",
+          "score": 0.05936960054657607,
+          "pctPositive": 0.9,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "TGT",
+          "score": 0.0523045193266395,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "SBUX",
+          "score": 0.04533133109365796,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": 0.004651785352260023,
+      "netReturn": 0.0026517853522600213,
+      "spyReturn": 0.03154633372358573,
+      "missedPicks": []
+    },
+    {
+      "month": "2023-08",
+      "picks": [
+        {
+          "ticker": "SIG",
+          "score": 0.08158082587808671,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "BBY",
+          "score": 0.05248023118947779,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "CCL",
+          "score": 0.04837907339386743,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "NFLX",
+          "score": 0.04380543862117302,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "TJX",
+          "score": 0.04318694765939601,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.03768483211260089,
+      "netReturn": -0.03968483211260089,
+      "spyReturn": -0.013428892782429718,
+      "missedPicks": []
+    },
+    {
+      "month": "2023-09",
+      "picks": [
+        {
+          "ticker": "BBWI",
+          "score": 0.04519460825852377,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "LUV",
+          "score": 0.027120640744723357,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "RCL",
+          "score": 0.021864405738449062,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "ROST",
+          "score": 0.01958308278049763,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "ANF",
+          "score": 0.018814786232429135,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.06840032808116689,
+      "netReturn": -0.07040032808116689,
+      "spyReturn": -0.04920774634818304,
+      "missedPicks": []
+    },
+    {
+      "month": "2023-10",
+      "picks": [
+        {
+          "ticker": "IPAR",
+          "score": 0.0761832235858523,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "SIG",
+          "score": 0.05032337411529675,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "MAT",
+          "score": 0.04716449643927252,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "MAR",
+          "score": 0.04530759180378092,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "RCL",
+          "score": 0.03489313251665917,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.066115537342222,
+      "netReturn": -0.068115537342222,
+      "spyReturn": -0.02131954013860514,
+      "missedPicks": []
+    },
+    {
+      "month": "2023-11",
+      "picks": [
+        {
+          "ticker": "M",
+          "score": 0.12392351388052694,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "BBWI",
+          "score": 0.11281941510358409,
+          "pctPositive": 0.9,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "CPRI",
+          "score": 0.1114124726241025,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "BURL",
+          "score": 0.10605290151210219,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "AEO",
+          "score": 0.09999089106504808,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": 0.17723300191896876,
+      "netReturn": 0.17523300191896876,
+      "spyReturn": 0.07982761833843913,
+      "missedPicks": []
+    },
+    {
+      "month": "2023-12",
+      "picks": [
+        {
+          "ticker": "PRKS",
+          "score": 0.04031233382000772,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "BURL",
+          "score": 0.038206556651776705,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "CCL",
+          "score": 0.03520454989587685,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "DG",
+          "score": 0.03384481863599586,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "WEN",
+          "score": 0.03118818237766039,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": 0.06815520733689816,
+      "netReturn": 0.06615520733689816,
+      "spyReturn": 0.03950580367311,
+      "missedPicks": []
+    },
+    {
+      "month": "2024-01",
+      "picks": [
+        {
+          "ticker": "NFLX",
+          "score": 0.09252453678315087,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "WBD",
+          "score": 0.08940535679278772,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "CMG",
+          "score": 0.07491572008770635,
+          "pctPositive": 0.9,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "AMZN",
+          "score": 0.0545446204408999,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "PSKY",
+          "score": 0.05356922434560933,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": 0.036967499600141625,
+      "netReturn": 0.03496749960014162,
+      "spyReturn": 0.021643877345047045,
+      "missedPicks": []
+    },
+    {
+      "month": "2024-02",
+      "picks": [
+        {
+          "ticker": "COTY",
+          "score": 0.11948647334814741,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "PRKS",
+          "score": 0.07124379026418394,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "BKNG",
+          "score": 0.06908127549151373,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "H",
+          "score": 0.06611469085501046,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "MAR",
+          "score": 0.06096111890615767,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": 0.05128696526897414,
+      "netReturn": 0.049286965268974144,
+      "spyReturn": 0.038593654048436524,
+      "missedPicks": []
+    },
+    {
+      "month": "2024-03",
+      "picks": [
+        {
+          "ticker": "GIS",
+          "score": 0.03697904856252594,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "PRDSY",
+          "score": 0.03626066312934068,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "LRLCY",
+          "score": 0.0351741957387688,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "IPAR",
+          "score": 0.03429533832242234,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "SJM",
+          "score": 0.03394432388677824,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": 0.04147988164455933,
+      "netReturn": 0.03947988164455933,
+      "spyReturn": 0.023096809539496492,
+      "missedPicks": []
+    },
+    {
+      "month": "2024-04",
+      "picks": [
+        {
+          "ticker": "HAS",
+          "score": 0.07099031437121592,
+          "pctPositive": 0.9,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "LVMUY",
+          "score": 0.062194093354160776,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "YUM",
+          "score": 0.06094296802075079,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "ULTA",
+          "score": 0.06045232651743907,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "LRLCY",
+          "score": 0.05585411623245847,
+          "pctPositive": 0.9,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.04024666912161154,
+      "netReturn": -0.04224666912161154,
+      "spyReturn": -0.03864718543128203,
+      "missedPicks": []
+    },
+    {
+      "month": "2024-05",
+      "picks": [
+        {
+          "ticker": "NFLX",
+          "score": 0.07493345768768604,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "LYV",
+          "score": 0.07483643787569168,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "MNST",
+          "score": 0.033763283650064875,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "PRDSY",
+          "score": 0.028208080238601285,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "AMZN",
+          "score": 0.026183344955598493,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": 0.043131784440290005,
+      "netReturn": 0.04113178444029,
+      "spyReturn": 0.05400216230807619,
+      "missedPicks": []
+    },
+    {
+      "month": "2024-06",
+      "picks": [
+        {
+          "ticker": "LULU",
+          "score": 0.07323190635704392,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "COTY",
+          "score": 0.07047563834093204,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "DECK",
+          "score": 0.0546461144775371,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "DPZ",
+          "score": 0.05383790646828078,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "DG",
+          "score": 0.04799697094610763,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.04301130900808204,
+      "netReturn": -0.04501130900808204,
+      "spyReturn": 0.03443665014502681,
+      "missedPicks": []
+    },
+    {
+      "month": "2024-07",
+      "picks": [
+        {
+          "ticker": "CMG",
+          "score": 0.07282440043927255,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "AMZN",
+          "score": 0.0584142498371842,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "COST",
+          "score": 0.05666802668614631,
+          "pctPositive": 0.9,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "TGT",
+          "score": 0.05072897508022084,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "SBUX",
+          "score": 0.04014826582298495,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.03138692531483749,
+      "netReturn": -0.033386925314837494,
+      "spyReturn": 0.01003038768568528,
+      "missedPicks": []
+    },
+    {
+      "month": "2024-08",
+      "picks": [
+        {
+          "ticker": "SIG",
+          "score": 0.087126532819637,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "AEO",
+          "score": 0.06475398482734003,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "TJX",
+          "score": 0.05182209111809868,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "FUN",
+          "score": 0.04150242932505918,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "ROST",
+          "score": 0.04103036577712266,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": 0.005078773090028009,
+      "netReturn": 0.0030787730900280084,
+      "spyReturn": 0.03806550812205142,
+      "missedPicks": []
+    },
+    {
+      "month": "2024-09",
+      "picks": [
+        {
+          "ticker": "ANF",
+          "score": 0.02098633678825741,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "ROST",
+          "score": 0.005302922617173507,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "LUV",
+          "score": 0.0001997922814765546,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "BURBY",
+          "score": -0.007781734698997639,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": 0.016489053546362858,
+      "netReturn": 0.01448905354636286,
+      "spyReturn": 0.0424572542846501,
+      "missedPicks": []
+    },
+    {
+      "month": "2024-10",
+      "picks": [
+        {
+          "ticker": "IPAR",
+          "score": 0.054378118825118324,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "NFLX",
+          "score": 0.043268581900168135,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "MAR",
+          "score": 0.036658034577345525,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "LVMUY",
+          "score": 0.03177613576217967,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "HLT",
+          "score": 0.027989212584707455,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.005720615972126382,
+      "netReturn": -0.007720615972126384,
+      "spyReturn": 0.000035291212491147404,
+      "missedPicks": []
+    },
+    {
+      "month": "2024-11",
+      "picks": [
+        {
+          "ticker": "ANF",
+          "score": 0.1487863934404164,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "BURL",
+          "score": 0.14435745132271602,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "M",
+          "score": 0.1395491917330347,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "BBWI",
+          "score": 0.11892348382339446,
+          "pctPositive": 0.9,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "ELF",
+          "score": 0.11298128211565168,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        }
+      ],
+      "grossReturn": 0.17653874127160743,
+      "netReturn": 0.17453874127160743,
+      "spyReturn": 0.05517992018541528,
+      "missedPicks": []
+    },
+    {
+      "month": "2024-12",
+      "picks": [
+        {
+          "ticker": "PRKS",
+          "score": 0.04786410075981236,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "IPAR",
+          "score": 0.046082560357602775,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "CCL",
+          "score": 0.041508209774940096,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "BURL",
+          "score": 0.03982113934562636,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "EL",
+          "score": 0.03976480836100327,
+          "pctPositive": 0.9,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.039089463880856615,
+      "netReturn": -0.041089463880856616,
+      "spyReturn": -0.025806316717211977,
+      "missedPicks": []
+    },
+    {
+      "month": "2025-01",
+      "picks": [
+        {
+          "ticker": "NFLX",
+          "score": 0.10011320654559244,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "WBD",
+          "score": 0.08580033306976872,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "CMG",
+          "score": 0.07677196156795059,
+          "pctPositive": 0.9,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "AMZN",
+          "score": 0.0679296876376475,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "PSKY",
+          "score": 0.0620506934717149,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": 0.032563686756089075,
+      "netReturn": 0.03056368675608907,
+      "spyReturn": 0.029385460823484238,
+      "missedPicks": []
+    },
+    {
+      "month": "2025-02",
+      "picks": [
+        {
+          "ticker": "COTY",
+          "score": 0.1103626866297385,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "CNK",
+          "score": 0.07095280458593693,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "H",
+          "score": 0.0704996468920364,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "PRKS",
+          "score": 0.06617932718400783,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "TPR",
+          "score": 0.0602978471153053,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.0612749840610063,
+      "netReturn": -0.0632749840610063,
+      "spyReturn": -0.006005806063234663,
+      "missedPicks": []
+    },
+    {
+      "month": "2025-03",
+      "picks": [
+        {
+          "ticker": "PRDSY",
+          "score": 0.045030697256728404,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "GIS",
+          "score": 0.042478788471534,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "SJM",
+          "score": 0.03848919765062049,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "LRLCY",
+          "score": 0.03485037722903047,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "ADDYY",
+          "score": 0.03345750068552564,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.05871556556181382,
+      "netReturn": -0.060715565561813824,
+      "spyReturn": -0.03888042455132157,
+      "missedPicks": []
+    },
+    {
+      "month": "2025-04",
+      "picks": [
+        {
+          "ticker": "HAS",
+          "score": 0.08238968374551861,
+          "pctPositive": 1,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "AMZN",
+          "score": 0.06325270364315835,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "YUM",
+          "score": 0.05978231578053804,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "STZ",
+          "score": 0.05742808298596831,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "EXPE",
+          "score": 0.05359327154853684,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.02827966011345213,
+      "netReturn": -0.030279660113452133,
+      "spyReturn": -0.011462165625005837,
+      "missedPicks": []
+    },
+    {
+      "month": "2025-05",
+      "picks": [
+        {
+          "ticker": "NFLX",
+          "score": 0.06706806601347928,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "LYV",
+          "score": 0.06698705167231359,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "PRKS",
+          "score": 0.04128011164505462,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "PRDSY",
+          "score": 0.0366048037171792,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "POOL",
+          "score": 0.02488715089264706,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": 0.03258120288342958,
+      "netReturn": 0.03058120288342958,
+      "spyReturn": 0.055365698062740436,
+      "missedPicks": []
+    },
+    {
+      "month": "2025-06",
+      "picks": [
+        {
+          "ticker": "ELF",
+          "score": 0.0844750340925554,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "LULU",
+          "score": 0.07757004567313036,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "COTY",
+          "score": 0.0655803083089309,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "DPZ",
+          "score": 0.052368224362935575,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "DG",
+          "score": 0.037109346762272566,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.013584606382038834,
+      "netReturn": -0.015584606382038835,
+      "spyReturn": 0.04549708758013441,
+      "missedPicks": []
+    },
+    {
+      "month": "2025-07",
+      "picks": [
+        {
+          "ticker": "IPAR",
+          "score": 0.064346967050028,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "MAT",
+          "score": 0.06355946124928052,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "VFC",
+          "score": 0.060700362337451706,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "AMZN",
+          "score": 0.05906820514854973,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "ADDYY",
+          "score": 0.054265314421481844,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.0915288296759548,
+      "netReturn": -0.0935288296759548,
+      "spyReturn": 0.023362683262787946,
+      "missedPicks": []
+    },
+    {
+      "month": "2025-08",
+      "picks": [
+        {
+          "ticker": "SIG",
+          "score": 0.07449136829911512,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "TJX",
+          "score": 0.042774778153955854,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "CCL",
+          "score": 0.03999808624635847,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "FUN",
+          "score": 0.03879124329267023,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "BKNG",
+          "score": 0.030986715448116636,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": 0.031542841727043046,
+      "netReturn": 0.029542841727043044,
+      "spyReturn": 0.037524955117577384,
+      "missedPicks": []
+    },
+    {
+      "month": "2025-09",
+      "picks": [
+        {
+          "ticker": "ANF",
+          "score": 0.03217063177399507,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "LUV",
+          "score": -0.0016310841922221747,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "BURBY",
+          "score": -0.0016547039875869473,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "ADDYY",
+          "score": -0.01360410192834163,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.009068815903857507,
+      "netReturn": -0.011068815903857509,
+      "spyReturn": 0.04335195845603266,
+      "missedPicks": []
+    },
+    {
+      "month": "2025-10",
+      "picks": [
+        {
+          "ticker": "NFLX",
+          "score": 0.060825233138104576,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "TPR",
+          "score": 0.04164321026879353,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "DECK",
+          "score": 0.03977053680237036,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "MAR",
+          "score": 0.0308274588560425,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "TXRH",
+          "score": 0.026812936061989832,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.054715056187019176,
+      "netReturn": -0.05671505618701918,
+      "spyReturn": 0.02036046693298269,
+      "missedPicks": []
+    },
+    {
+      "month": "2025-11",
+      "picks": [
+        {
+          "ticker": "ANF",
+          "score": 0.17374982727279792,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "BURL",
+          "score": 0.15514707781751086,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "BBWI",
+          "score": 0.13288323218486514,
+          "pctPositive": 0.9,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "M",
+          "score": 0.13252160779494884,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "ELF",
+          "score": 0.1288736302108555,
+          "pctPositive": 0.7777777777777778,
+          "sampleSize": 9
+        }
+      ],
+      "grossReturn": -0.042557293058387236,
+      "netReturn": -0.04455729305838724,
+      "spyReturn": 0.00007312010445529755,
+      "missedPicks": []
+    },
+    {
+      "month": "2025-12",
+      "picks": [
+        {
+          "ticker": "FNKO",
+          "score": 0.06369428022703169,
+          "pctPositive": 0.75,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "EL",
+          "score": 0.0351126616465374,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "PRKS",
+          "score": 0.032513007963987976,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "TPR",
+          "score": 0.031206183417200727,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "CCL",
+          "score": 0.030455661237492916,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": 0.10539188810270424,
+      "netReturn": 0.10339188810270424,
+      "spyReturn": 0.005387622058929067,
+      "missedPicks": []
+    },
+    {
+      "month": "2026-01",
+      "picks": [
+        {
+          "ticker": "WBD",
+          "score": 0.09965881698300336,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "NFLX",
+          "score": 0.08365421062138269,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "CMG",
+          "score": 0.06956614502810449,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "PSKY",
+          "score": 0.06484975927485419,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "CAKE",
+          "score": 0.0642014186164428,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.02631792649422666,
+      "netReturn": -0.028317926494226663,
+      "spyReturn": 0.012881081566172412,
+      "missedPicks": []
+    },
+    {
+      "month": "2026-02",
+      "picks": [
+        {
+          "ticker": "COTY",
+          "score": 0.07285647856445532,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "MAT",
+          "score": 0.06980810223782505,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "TPR",
+          "score": 0.06045849959247555,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "UAL",
+          "score": 0.039846553288811454,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "TXRH",
+          "score": 0.03263625407501936,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.04732437501441086,
+      "netReturn": -0.04932437501441086,
+      "spyReturn": -0.013545971717903815,
+      "missedPicks": []
+    },
+    {
+      "month": "2026-03",
+      "picks": [
+        {
+          "ticker": "SJM",
+          "score": 0.04345774161871644,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "GIS",
+          "score": 0.03301112980705496,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "LRLCY",
+          "score": 0.03254002811890898,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "PRDSY",
+          "score": 0.024662017790051526,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "PEP",
+          "score": 0.02382839755490241,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": -0.12399415659164828,
+      "netReturn": -0.12599415659164828,
+      "spyReturn": -0.049919741201385676,
+      "missedPicks": []
+    },
+    {
+      "month": "2026-04",
+      "picks": [
+        {
+          "ticker": "HAS",
+          "score": 0.07030734930589655,
+          "pctPositive": 0.9,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "LRLCY",
+          "score": 0.0612203425686844,
+          "pctPositive": 0.9,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "STZ",
+          "score": 0.05970646940983691,
+          "pctPositive": 0.9,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "ULTA",
+          "score": 0.05410502501744839,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "MAR",
+          "score": 0.047691434725665595,
+          "pctPositive": 0.9,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": 0.05281494408295402,
+      "netReturn": 0.05081494408295402,
+      "spyReturn": 0.09678893835524294,
+      "missedPicks": []
+    },
+    {
+      "month": "2026-05",
+      "picks": [
+        {
+          "ticker": "FNKO",
+          "score": 0.23294922779368482,
+          "pctPositive": 1,
+          "sampleSize": 8
+        },
+        {
+          "ticker": "LYV",
+          "score": 0.06582814647830815,
+          "pctPositive": 0.8,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "NFLX",
+          "score": 0.061542045567889794,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "MNST",
+          "score": 0.044410871434432134,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        },
+        {
+          "ticker": "PRKS",
+          "score": 0.041466425041059386,
+          "pctPositive": 0.7,
+          "sampleSize": 10
+        }
+      ],
+      "grossReturn": 0.06231128081689765,
+      "netReturn": 0.06031128081689765,
+      "spyReturn": 0.04971894096544139,
+      "missedPicks": []
+    }
+  ]
+}

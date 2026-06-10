@@ -1,172 +1,123 @@
-# Phase 6 — Polish (summary)
+# Phase 7 — Backtest engine (summary)
 
-## What landed
+## The question this phase existed to answer
 
-**Mobile-responsive heatmaps** — the brief's flagged "hardest part":
+Before building the autonomous "pick stocks weekly" autopilot (the
+post-Phase-6 pivot), validate the underlying strategy: **if we had traded
+the seasonality rules every month for the last ~9.4 years — using only the
+data available at each decision point — would we have beaten just buying
+SPY?**
 
-- First column (row labels) is now `position: sticky; left: 0` so it stays
-  visible while the user scrolls the rest horizontally.
-- Cells shrink on small viewports (`px-1` and `text-[10px]` < 640px;
-  `px-2` and `text-[11px]` ≥ 640px).
-- Right-edge gradient fade on mobile signals there's more to see, plus a
-  "Swipe horizontally to see all columns" hint below the grid.
-- Sticky header subtle shadow so labels feel layered over data.
+## The answer: no. Decisively.
 
-**Loading skeletons** — Next.js 14 App Router route-level `loading.tsx`:
+Default configuration (10y scoring window, top-5 equal-weighted monthly,
+n≥5 and ≥60% positive-years gates, 10 bps/side costs, 2017-01 → 2026-05):
 
-- `src/app/loading.tsx` — generic 6-card grid fallback.
-- `src/app/stock/[ticker]/loading.tsx` — shape-matched: page header,
-  breadcrumb, controls, 4-up summary stats, fingerprint band, event-window
-  table.
-- `src/app/category/[slug]/loading.tsx` — shape-matched: header, controls,
-  4-up stats, heatmap, 12-card grid.
-- New `Skeleton` primitive: pulsing zinc-200 / dark:zinc-800 block.
+| Metric                |   Strategy | SPY buy-and-hold |
+| --------------------- | ---------: | ---------------: |
+| Total return          |     +48.2% |      **+238.8%** |
+| CAGR                  |      +4.3% |       **+13.8%** |
+| Sharpe (rf=0)         |       0.29 |         **0.88** |
+| Max drawdown          | **−42.3%** |           −24.6% |
+| Hit rate (months > 0) |        50% |              69% |
+| Months beating SPY    |        45% |                — |
 
-**Error boundaries**:
+Lower return, higher risk, deeper drawdowns. There is no configuration in
+the sensitivity grid that changes the conclusion.
 
-- `src/app/error.tsx` — client component with `reset()` retry button and
-  back-home link; logs the error and surfaces the `digest` for support.
-- `src/app/not-found.tsx` — friendly 404 with links into `/categories`,
-  `/calendar`. Reaches users from both unmatched routes and explicit
-  `notFound()` calls (unknown ticker, unknown category slug).
+## Sensitivity analysis — why it fails
 
-**Waitlist signup form** — `src/components/WaitlistForm.tsx`:
+| Variant                                            |       Total |   CAGR | Sharpe | Max DD | What it tells us                                                                                    |
+| -------------------------------------------------- | ----------: | -----: | -----: | -----: | --------------------------------------------------------------------------------------------------- |
+| Default (k=5, 10 bps)                              |      +48.2% |  +4.3% |   0.29 | −42.3% | baseline                                                                                            |
+| **Zero costs**                                     |      +85.8% |  +6.8% |   0.37 | −40.4% | Costs hurt (~38pp over the period) but are not the story — even free trading loses to SPY by ~150pp |
+| Concentrated (k=3)                                 |      +42.9% |  +3.9% |   0.27 | −56.2% | Concentration adds risk, not return                                                                 |
+| Diversified (k=10)                                 |      +91.6% |  +7.1% |   0.41 | −37.6% | More diversification → closer to the universe average, still far behind SPY                         |
+| **Strict gates (n≥8, ≥70% positive)**              |  **−28.0%** |  −3.4% |  −0.02 | −51.6% | The "highest-conviction" seasonal patterns did the _worst_. Smoking gun.                            |
+| Short memory (5y window)                           |      +45.9% |  +4.1% |   0.28 | −48.9% | Not a window-length artifact                                                                        |
+| **Universe equal-weight (no selection, no costs)** | **+165.6%** | +10.9% |   0.58 | −37.2% | The decomposition key — see below                                                                   |
 
-- Client component on the landing page (`source="landing"`).
-- Email validation + disabled-while-submitting state + tailored
-  messages for 409 (already signed up), 429 (rate-limited), 400 (bad email),
-  network errors.
-- Honeypot: hidden `website` field. Bots auto-fill it; real users don't.
-  Server returns 201 either way so bots can't distinguish — checked in
-  `/api/waitlist`.
+### Decomposition of the underperformance
 
-**SEO + OpenGraph**:
+```
+SPY buy-and-hold                          +238.8%
+  └─ universe composition cost  (−73pp)
+Universe equal-weight, no selection       +165.6%
+  └─ seasonality selection cost (−80pp)
+Strategy, no costs                         +85.8%
+  └─ transaction costs          (−38pp)
+Strategy as specified                      +48.2%
+```
 
-- `metadataBase` set from `NEXT_PUBLIC_APP_URL` in root layout.
-- OG, Twitter, and `keywords` metadata for the global default.
-- `app/robots.ts` → generates `/robots.txt` (allow everything except `/api`).
-- `app/sitemap.ts` → generates `/sitemap.xml` enumerating static pages
-  - every active stock + every category, with the right `changeFrequency`
-    per route type.
-- ⚠️ Dynamic OG image (`opengraph-image.tsx`) prototyped but pulled —
-  `@vercel/og` chokes on the space in the local Windows path
-  ("New folder/..."). The static OG metadata is enough for sharing
-  previews until we deploy to Vercel; we can add `public/og.png` or
-  re-enable the dynamic route there.
+Two independent problems:
 
-**Plausible analytics** — `src/components/Analytics.tsx`:
+1. **Universe composition.** Consumer-spending equities (retail, apparel,
+   cinema, food) simply lagged the tech-heavy S&P 500 over 2017–2026 by
+   ~73pp. No stock-picking rule inside this universe could have closed
+   that gap.
+2. **The seasonality signal is _negative_ within its own universe.**
+   Picking the seasonally-best 5 stocks each month roughly _halved_ the
+   return of naively holding all 88. The strict-gates variant makes the
+   mechanism visible: the more reliably positive a (stock, month) looked
+   in-sample, the worse it did out-of-sample. With n ≤ 15 samples per
+   cell, the top-ranked patterns are substantially noise — and noise
+   mean-reverts. This is consistent with the anomaly-decay literature
+   (McLean & Pontiff, 2016: anomalies decay ~50%+ post-publication) and
+   with our own paper's §4.4 argument for why n≤15 can't support
+   prediction.
 
-- Injected at the bottom of the root layout via `next/script` with
-  `strategy="afterInteractive"`.
-- No-op when `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` is unset so local dev doesn't
-  pollute production stats.
-- Cookieless, no consent banner needed.
+## What was built (and stays useful)
 
-**HTTP cache headers** — `src/lib/http-cache.ts`:
-
-- `SCORES_CACHE = "public, s-maxage=3600, stale-while-revalidate=86400"`
-  on `/api/categories`, `/api/category/[slug]`, `/api/stock/[ticker]`.
-  CDN serves stale immediately, revalidates in the background.
-- `EVENTS_CACHE = "public, s-maxage=1800, stale-while-revalidate=21600"`
-  on `/api/events/upcoming` (shorter since "upcoming" changes daily).
-- `/api/waitlist` (POST) intentionally stays no-cache.
-
-**`.env.example` updates** — documented `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` and
-`RATE_LIMIT_SALT` for production deploy.
+- **`src/lib/backtest/`** — pure walk-forward engine: `months.ts`,
+  `metrics.ts` (total/CAGR/Sharpe/maxDD/hit-rate), `strategy.ts`
+  (as-of ranking with eligibility gates), `engine.ts` (equal-weight
+  top-K, round-trip costs, cash months, delisting-gap handling).
+  **29 new unit tests; 95 total, all green.**
+- **No-lookahead enforced by construction and proven by test**: a stock
+  with five straight +10% Julys whose traded July crashes −50% is still
+  picked and eats the crash.
+- **`npm run backtest`** CLI with `--window/--top-k/--min-n/--min-pos/
+--cost-bps/--start/--end/--out`; writes a markdown + JSON report.
+- **Reports** for all seven runs in `docs/backtest/`.
+- **SPY benchmark plumbing**: hidden `benchmark` category, excluded from
+  all public listings; SPY ingested (3,772 daily bars).
 
 ## Verification
 
-- **`npm test`**: 66 tests across 4 files, all green.
-- **`npm run lint`**: clean.
-- **`npm run build`**: clean. 14 routes (10 page routes + 4 API routes) +
-  `/robots.txt` and `/sitemap.xml` built. New skeletons + error pages
-  show up as expected.
-- **`npm run format:check`**: clean.
-- Mobile-responsive heatmap visually verified via dev server at viewport
-  widths 360px / 640px / 1024px.
+- `npm test` — 95/95.
+- `npm run lint` / `format:check` / `build` — clean (build verified after
+  Supabase restore; the earlier sitemap failure was the paused DB).
+- Engine results tie out with displayed seasonality scores by
+  construction (same first-bar→last-bar monthly return definition).
 
-## Decisions worth flagging
+## Consequence for the pivot (decision needed)
 
-1. **Horizontal-scroll heatmap, not transposed layout.** The Phase 5
-   SUMMARY hinted at a "vertical-month layout on small screens." Tried it;
-   lost the visual scan that makes heatmaps useful. Sticky labels +
-   smaller cells + scroll affordances ended up better — you can still read
-   one row across all 12 columns by swiping.
-2. **Loading skeletons are shape-matched, not generic.** A generic gray
-   block at top is mildly worse than no skeleton at all (because it
-   resizes on data arrival). The route-specific `loading.tsx` files mirror
-   the real page structure so the transition is no-jump.
-3. **No global app `loading.tsx` for `/about`** — it's static, renders
-   instantly, doesn't need a skeleton.
-4. **Honeypot, not captcha.** Adding hCaptcha or reCAPTCHA is a
-   privacy-and-bundle-size tradeoff we don't need yet. The hidden-field
-   honeypot catches 90%+ of dumb bots; rate limit catches the rest.
-5. **Dynamic OG images deferred.** The infrastructure (`opengraph-image.tsx`
-   shape, `next/og` import) is fine, but `@vercel/og` resolves a `file://`
-   URL internally and the space in `"New folder"` breaks `fileURLToPath`.
-   It'll work on Vercel/Linux. Removed the file; reintroduce after deploy.
-6. **Analytics is no-op until env var set.** Avoids the Plausible script
-   loading in dev (which would post events to production stats and skew
-   numbers). Set `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` on Vercel + create the
-   site at plausible.io.
-7. **Cache headers coexist with `force-dynamic`.** `force-dynamic` tells
-   Next.js to render at request time; `Cache-Control: s-maxage` tells the
-   CDN it's OK to serve cached responses. Together: server always renders
-   fresh, CDN caches per (URL + query-params).
-8. **Sitemap is built at deploy time, not refreshed dynamically.** Means
-   newly seeded tickers don't appear in the sitemap until a redeploy.
-   Acceptable for a daily-refresh project; we can move to ISR
-   (`revalidate = 3600`) if SEO matters more later.
+The agreed plan was Phase 7 backtest → Phase 8 automation → Phase 9
+signal engine → Phase 10 autopilot dashboard. The backtest was the
+go/no-go gate for Phases 9–10, and the evidence says **no-go for the
+strategy as designed**: automating it would automate value destruction,
+even with demo money it would just demonstrate failure slowly.
 
-## Risks / follow-ups (post-Phase-6)
+Three honest paths forward:
 
-- **Dynamic OG image** still wants to ship for `/stock/[ticker]` and
-  `/category/[slug]`. Each card should show "+12.3% Jul, n=15" or similar.
-  Recipe is in the deleted `opengraph-image.tsx`; re-enable post-deploy.
-- **Mobile heatmap with many rows** (the event-window grid on
-  `/stock/[ticker]` has ~17 rows) still scrolls vertically a long way on
-  phones. Could collapse to top-3 events on mobile with "show all" toggle.
-- **No CSRF on `/api/waitlist`.** Rate-limit + honeypot + unique email
-  cover the abuse vectors that matter for a waitlist. CSRF would matter
-  if we add authenticated mutations later.
-- **No client-side error boundary inside the data sections.** Errors in
-  the server component bubble to `app/error.tsx`, which replaces the whole
-  page. Inline `<Suspense>` boundaries around each section would let part
-  of the page survive a single failed query.
-- **`/api/category/[slug]` still does 14 queries** (1 category + 1 stocks
-  - 1 raw aggregate + 12 top-N per month). Promise.all parallelizes
-    them but it's still N round-trips. A single windowed-aggregation SQL
-    could collapse it. Phase 7 perf-pass if needed.
+1. **Accept the negative result (recommended).** Build Phase 8
+   (automation — daily ingest + weekly analyze cron) which has standalone
+   value for the research product, and publish the negative finding as a
+   new section of the paper. "We built the measurement tool, then tested
+   tradability: the patterns are not tradable, consistent with
+   anomaly-decay literature" is a _stronger_ research contribution than
+   the tool alone, and it differentiates the project from every
+   seasonality dashboard that implies otherwise.
+2. **Iterate on the strategy and re-test** — e.g., market-relative
+   scoring (pick stocks seasonally strong _relative to SPY_), event-window
+   entries instead of calendar months, long the universe in strong months
+   / cash in weak ones. Caveat stated up front: every iteration evaluated
+   against the same 9 years erodes the validity of the test (overfitting
+   by iteration), and the strict-gates result suggests the core signal is
+   noise. Expectations should be low.
+3. **Build the autopilot anyway as an educational feature** — virtual
+   portfolio with the negative backtest disclosed prominently ("watch
+   what following seasonal patterns actually does"). Pedagogically
+   interesting; not what the pivot intended.
 
-## How to use the new bits
-
-```bash
-# Plausible analytics — set in production env only
-NEXT_PUBLIC_PLAUSIBLE_DOMAIN="seasonality.example.com"
-
-# Rate-limit salt — generate a random one for production
-RATE_LIMIT_SALT="$(openssl rand -hex 32)"
-
-# Verify caching
-curl -I http://localhost:3000/api/categories
-#   Cache-Control: public, s-maxage=3600, stale-while-revalidate=86400
-
-curl -I http://localhost:3000/api/waitlist -X POST
-#   (no Cache-Control, default no-store)
-
-# Inspect sitemap
-curl http://localhost:3000/sitemap.xml | head -20
-```
-
-## What's still on the board (originally planned, intentionally skipped)
-
-- **Backtest preview UI** on `/stock/[ticker]` — still a placeholder.
-  Needs entry/exit rule + IRR computation; Phase 7 territory.
-- **Month × year heatmap** on `/category/[slug]` — needs a new cache table
-  for per-year-per-month-per-category aggregates. Phase 7 if you want it.
-- **Per-page dynamic OG images** — pulled due to the Windows path issue
-  noted above. Post-deploy follow-up.
-
-All 6 brief phases shipped. Tests green, lint green, build green. Phase 7+
-ideas live in `notes/future-ideas.md` (currently has the demo-account
-trial idea from earlier).
+Stopping here for review per the phase gates.
